@@ -1,0 +1,57 @@
+.Jombotron{
+    height: 491px;
+    width: 100%;
+    object-fit: contain;
+    align-items: center;
+    background-color: aliceblue;
+  
+    
+}
+.Jombotron img{
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+    height: 491px;
+  
+}
+.Jombotron-desc{
+  
+    padding-top: 80px;
+    position: absolute;
+    line-height: 98px;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+}
+.Jombotron-desc h2{
+    font-size: 45px;
+    color: white;
+}
+.Jombotron span{
+    color: #124F44;
+}
+.Jombotron h4{
+    line-height: 38px;
+    color: white;
+    font-weight: 400;
+    font-size: 28px;
+}
+.Jombotron .btn{
+    background-color: #124F44;
+    color: white;
+    border-radius: 15px;
+    padding: 3px 10px 3px 10px;
+}
+
+@media (max-width:770px){
+    .Jombotron-desc{
+        padding-top: 100px;
+        text-align: center;
+       
+    }
+    .Jombotron-desc h2{
+        font-size: 40px;
+    }
+    .Jombotron-desc h4{
+        font-size: 22px;
+    }
+}

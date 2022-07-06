@@ -1,0 +1,118 @@
+.filter-container{
+    background-color: #E5E5E5;  
+    padding-top: 30px;
+    height: 100%;
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+.filter-title{
+    border-bottom: 2px solid black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.filter-item{
+  margin-left: 30px;
+    border-radius: 15px;
+    background-color: white;
+    padding-bottom: 20px;
+    height: 100%;
+}
+.filter-item h3{
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.cebox{
+    display: block;
+  position: relative;
+ padding-left: 40px;
+  cursor: pointer;
+  font-size: 17px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.cebox input{
+    position: absolute;
+  opacity: 1;
+  cursor: pointer;
+  height: 25px;
+    width: 25px;
+   
+    top: 0;
+    left: 0; 
+}
+.checkmark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+  .filter-item label{
+      padding-bottom: 10px;
+  }
+  .tingkatan{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 2px solid black;
+  }
+  .main{
+    display: flex;
+   
+    flex-wrap: wrap;
+  }
+  @media (max-width:770px){
+    .filter-item{
+    padding-bottom: 0px;
+    max-width: 80%!important;
+    margin: auto;
+    }
+    .cebox{
+      display: flex;
+    }
+    .main{
+      padding-top: 40px;
+    }
+  }
+  /* .cebox:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  .cebox input:checked ~ .checkmark{
+    background-color: #2196F3;
+  }
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  .cebox input:checked ~ .checkmark:after {
+    display: block;
+  }
+  .cebox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  } */
+
+  .main::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .main::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 1em;
+  }
+
+  .main::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 1em;
+  }

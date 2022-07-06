@@ -1,0 +1,76 @@
+.tab-content{
+    padding-bottom: 20px;
+
+    .modal-header{
+        padding-bottom: 0;
+    }
+}
+.square{
+    display: flex;
+    margin: 0px auto;
+    width: 100%;
+    padding: 8px;
+    height: auto;
+    margin-top: 10px;
+    color: black;
+    font-family: Arial;
+    text-transform: capitalize;
+    background-color: white;
+
+    img{
+      
+        width: 300px;
+        height: 300px;
+        padding: 0 10px 0 0;
+    }
+}
+
+
+// Aturan
+
+.aturan{
+    height: 100%;
+    background-color: white;
+    margin-bottom: 20px;
+
+    img{
+        display: block;
+        width: 30%;
+        height: 30%;
+        margin: auto;
+    }
+  
+}
+
+.lokasi{
+    height: 100%;
+    background-color: white;
+    
+}
+.lokasi-wrapper{
+    padding: 30px;
+}
+.lokasi-content{
+    display: flex;
+}
+.lokasi img{
+    max-width: 550px;
+    height: auto;
+}
+.lokasi-detail{
+    margin-left: 20px;
+}
+
+.aksebilitas{
+    background-color: white;
+    height: 100%;
+    margin-bottom: 20px;
+    img{
+        width: 100%;
+    }
+}
+.aksebilitas-content{
+    padding: 40px;
+}
+
+

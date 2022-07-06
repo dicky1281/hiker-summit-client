@@ -1,0 +1,41 @@
+
+.carousel-inner{
+    height: 100vh;
+
+    img{
+        height: 100vh;
+    }
+
+    @media (min-width:990px){
+
+        text-align: -webkit-center;
+
+        .carousel-item{
+            height: 100%!important;
+            margin-top: 18vh;
+        
+        }
+        
+       
+        img{
+            height: 75%!important;
+            border-radius: 15px;
+            width: 90%!important;
+        }
+        
+       
+    }
+   
+}
+.carousel-control-prev-icon{
+    background-image: url('./arrl.png');
+}
+.carousel-control-next-icon{
+    background-image: url('./arrr.png');
+}
+.carousel-control-prev{
+    padding-top: 10vh;
+ }
+ .carousel-control-next{
+    padding-top: 10vh;
+ }

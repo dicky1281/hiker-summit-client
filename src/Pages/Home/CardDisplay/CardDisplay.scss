@@ -1,0 +1,46 @@
+#root{
+    overflow-x: hidden;
+}
+.line2{
+    width: 200px;
+    margin-left: 50px;
+    border-top: 10px solid #71958F;
+    border-radius: 15px;
+}
+.slide-card{
+    height: 100%;
+    width: 100%;
+    background-color: #E5E5E5;
+}
+.slide-title{
+    padding-top: 100px;
+}
+.card-mountain{
+    padding-top: 60px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 50px;
+    
+}
+.tombol{
+    .btn{
+        background-color: orange;
+        border-radius: 15px;
+        color: white;
+        font-weight: 700;
+        padding: 3px 10px 3px 10px;
+    }
+}
+
+.slide-card a{
+
+    display: block;
+    padding-top: 0px;
+
+}
+@media (max-width:770px){
+ 
+    .line2{
+        margin: auto;
+    }
+}

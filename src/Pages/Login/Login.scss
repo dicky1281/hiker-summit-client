@@ -1,0 +1,44 @@
+.login-container{
+    height: 100vh;
+    background-image: url('./logging.png');
+    background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.login-content{
+    padding-top: 230px;
+}
+.form-group{
+    padding-bottom: 10px;
+}
+.form-check{
+    padding-bottom: 10px;
+}
+.login-content h2{
+    font-family: 'Quicksand';
+font-style: normal;
+font-weight: 700;
+}
+.login-content p{
+    font-family: 'Quicksand';
+font-style: normal;
+font-weight: 500;
+}
+.login-content label{
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 700;
+}
+.login-content .form-control{
+    background: rgba(228, 228, 228, 0.75);
+    border-radius: 9px;
+    border: none;
+}
+
+.login-content button{
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 700;
+    border-radius: 9px;
+}

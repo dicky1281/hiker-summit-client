@@ -1,0 +1,83 @@
+.explore-container{
+    height: 100%;
+    background-image: url('./guide.png'); 
+  background-repeat: no-repeat;
+  background-size:100% 100%;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.explore-caption{
+    padding-top: 35vh;
+    width: 100%;
+    padding-bottom: 250px;
+}
+
+.explore-caption span{
+    font-family: 'Quicksand', sans-serif;
+    color: orange;
+    font-size:  5.1vh;
+    font-style: normal;
+    font-weight: 700; 
+    filter: brightness(100%); 
+}
+.explore-caption h1{
+    color: white;
+    font-size:  5.1vh;
+    font-style: normal;
+    font-weight: 700;  
+}
+.explore-caption h3{
+    color: white;
+    font-weight: 400;
+    font-size: 3.9vh;
+}
+ 
+.tabs-guide-content{
+    .nav-tabs .nav-link.active{
+        background-color: transparent!important;
+        border: 3px solid transparent!important;
+        border-color: transparent transparent black !important;
+    }
+    .nav-tabs .nav-link{
+        color: black!important;
+    }
+
+}
+
+.sewa-guide {
+    height: 100%;
+
+    @media (max-width:770px){
+        img{
+            display: none;
+        }
+    }
+   
+    
+}
+.modal-header{
+    border-bottom: none!important;
+}
+
+.icon-box {
+	color: #fff;		
+	position: absolute;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: -70px;
+	width: 95px;
+	height: 95px;
+	border-radius: 50%;
+	z-index: 9;
+	background: #82ce34;
+	padding: 15px;
+	text-align: center;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.icon-box i {
+	font-size: 58px;
+	position: relative;
+	top: 3px;
+}

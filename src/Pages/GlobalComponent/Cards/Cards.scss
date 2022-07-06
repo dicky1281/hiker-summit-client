@@ -1,0 +1,137 @@
+.card{
+    cursor: pointer;
+    margin: 20px 20px;
+    max-width: max-content;
+    overflow: hidden;
+    width: 350px;
+    padding: 0;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+
+    .btn{
+        text-transform: capitalize;
+        padding: 1px 5px;
+        margin-bottom: 10px;
+    }
+    .card-img-top{
+        transition: transform .2s; /* Animation */
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        width: 300px!important;
+        height: 270px;
+    }
+
+    .category{
+        position: absolute;
+       text-transform: uppercase;
+        transform: rotate(0deg);
+        margin-right: 10px;
+        display: block;
+        padding-bottom: 100px;
+        padding-right: 0px;
+        width: 60px;
+        border-radius: 20%;
+        padding: 10px;
+        height: 50px;
+
+        h4{
+            padding-top: 10px;
+            text-align: center;
+            
+            font-size: 10px;
+            
+        }
+    }
+    .card-action{
+        font-size: 16px;
+        display: flex;
+    }
+    i{
+        margin-left: 0px;
+    }
+    .favorite{
+        margin-left: auto;
+        margin-bottom: 20px;
+
+        i{
+            margin-left: 10px;
+        }
+    }
+    .bookmark{
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        text-align: center;
+        background-color: white;
+        margin-left: auto;
+        margin-top: -35px;
+        position: relative;
+
+        button{
+            border: none;
+            height: 35px;
+            width: 35px;
+            border-radius: 50%;
+        }
+
+        i{
+            font-size: 20px;
+            padding-top: 10px;
+            color: #E86667;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+.card-title{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+    color: #124F44;
+}
+.card-text span{
+    font-family: 'Quicksand', sans-serif;
+    color: #404040;
+    filter:opacity(65%)
+}
+
+
+@media (min-width:1200px){
+    .card{
+        margin-top: 20px;
+    }
+    .card-img-top{
+        max-width: 300px!important;
+        height: 300px;
+    }
+   
+}
+@media (max-width:1190px){
+    .card{
+        margin-top: 20px;
+    }
+    .card-img-top{
+        width: 350px!important;
+        height: 350px;
+    }
+   
+}
+
+
+@media (max-width:770px){
+    .card{
+  
+        margin: 20px auto;
+    }
+   
+}
+.card-img-top:hover{
+    transform: scale(1.2);
+}
+.inner{
+    overflow: hidden;
+}

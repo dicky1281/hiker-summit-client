@@ -1,0 +1,89 @@
+.guide-container {
+  height: 100vh;
+  background-image: url("./explore-image.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  .caption-text {
+    padding-top: 30vh;
+  }
+  span {
+    font-family: "Quicksand", sans-serif;
+    color: orange;
+    font-size: 8.4vh;
+    font-style: normal;
+    font-weight: 700;
+    filter: brightness(100%);
+  }
+  h1 {
+    color: white;
+    font-size: 8.4vh;
+    font-style: normal;
+    font-weight: 700;
+  }
+  h3 {
+    color: white;
+    font-weight: 400;
+    font-size: 3.9vh;
+  }
+}
+
+.search-input {
+  padding-top: 15px;
+}
+.search-input input {
+  background-color: #e5e5e5;
+  opacity: 0.7;
+}
+.search-input input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 15px;
+  font-size: 16px;
+  background-image: url("./search-icon.png");
+  background-position: 98%;
+  background-repeat: no-repeat;
+  background-size: 30px;
+  padding: 12px 0px 12px 10px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+.search-input ::placeholder {
+  font-size: 20px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+}
+.arrow {
+  padding-top: 60px;
+  text-align: center;
+  opacity: 1;
+  animation: bounce2 2s ease infinite;
+}
+
+.arrow .btn {
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+.arrow i {
+  color: white;
+}
+
+@keyframes bounce2 {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}

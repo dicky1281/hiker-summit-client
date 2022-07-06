@@ -1,0 +1,53 @@
+.hero-container{
+    height: 100vh;
+    background-image: url('./home2.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+
+    .btn{
+        color: white;
+        font-weight: 700;
+        background-color: orange;
+        border-radius: 15px;
+        padding: 3px 10px 3px 10px;
+    }
+    .caption{
+        padding-top: 200px;
+        width: 100%;
+   
+    }
+    span{
+        font-family: 'Quicksand', sans-serif;
+        color: orange;
+        font-size: 8.4vh;
+        font-style: normal;
+        font-weight: 700; 
+        filter: brightness(100%); 
+    }
+    h1{
+        color: white;
+        font-size:  8.4vh;
+        font-style: normal;
+        font-weight: 700;  
+    }
+    h3{
+        color: white;
+        font-weight: 400;
+        font-size: 3.9vh;
+    }
+    @media (max-width:770px){
+        .caption{
+            text-align: center;
+        }
+        .caption span{
+            font-size: 40px;
+        }
+        .caption h1{
+            font-size: 40px;
+        }
+    }
+    
+}

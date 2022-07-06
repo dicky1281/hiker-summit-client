@@ -1,0 +1,104 @@
+.destination {
+    background-color: #f1f1f1;
+   
+
+    .tabs-content{
+        height: 100%;
+    }
+    .nav{
+        margin: auto;
+        width: max-content;
+        margin-top: 10px;
+        padding-right: 10px;
+        border-radius: 9px
+    }
+    .nav-tabs{
+        border: none;
+        background-color: #C4C4C4;
+
+        .nav-link{
+            color: black;
+        }
+        .nav-link.active{
+            background-color: transparent;
+            border: none;
+            color: black;
+            font-weight: 500;
+        }
+        
+
+    }
+   
+}
+.comment-section{
+    margin:10px 0px; 
+    background: transparent;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.R-title{
+    color: black;
+    font-size: 28px;
+    font-weight:500; 
+    margin-bottom: 10px; 
+}
+.review-aksi{
+    justify-content: space-between;
+    
+}
+.comment-section .media-review{
+    background-color: white;
+    padding:20px 20px;
+    border:1px solid #ccc;
+}
+.comment-section .media-review:first-child{
+    border-top:1px solid #ccc;
+}
+.comment-section .media .media-user{
+    margin-right: 15px; 
+    border-radius: 50%;
+    overflow: hidden; 
+    background: rgb(236, 236, 236);
+    width: 77px;height: 77px; 
+ }
+.comment-section .media .media-user img{
+    width:100%; 
+    height:100%; 
+    object-fit: cover;
+}
+.comment-section .media .M-flex{
+    display: flex;
+    justify-content: space-between;
+}
+.comment-section .media .M-flex .title{
+    font-size: 12px;
+     color: #1c1d36;  
+     margin-bottom: 10px;
+     font-weight:400;
+}
+.comment-section .media .M-flex .title span{
+    font-size: 20px;  
+    display: block;
+    font-weight:700;
+    margin-bottom:5px;
+}
+.comment-section .media .description{
+    font-size: 14px; 
+    color: #5b5b5b;
+    margin-bottom: 20px;
+}
+.rating-row ul{
+    list-style:none;
+    display:flex; 
+    padding:0 ; 
+    margin:0;
+}
+.rating-row ul li{
+    color:#ffc107;
+    font-size:20px;
+    margin:0px 3px;
+}
+.rate{
+    display: flex;
+    justify-content: center;
+}

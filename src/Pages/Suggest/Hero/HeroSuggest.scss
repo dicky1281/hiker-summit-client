@@ -1,0 +1,32 @@
+.suggest-container{
+    height: 100vh;
+    background-image: url('./suggest.png'); 
+    background-repeat: no-repeat;
+    background-size:100% 100%;
+    background-attachment: fixed;
+    position: relative;
+
+    .suggest-caption{
+        padding-top: 200px;
+        width: 100%;
+    }
+    h1{
+        color: white;
+        font-size:  5.1vh;
+        font-style: normal;
+        font-weight: 700;  
+    }
+    h3{
+        color: white;
+        font-weight: 400;
+        font-size: 3.9vh;
+    }
+    span{
+        font-family: 'Quicksand', sans-serif;
+        color: orange;
+        font-size:  5.1vh;
+        font-style: normal;
+        font-weight: 700; 
+        filter: brightness(100%); 
+    }
+}
