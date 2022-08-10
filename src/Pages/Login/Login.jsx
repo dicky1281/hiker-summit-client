@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Container } from 'react-bootstrap'
+import { Container,Spinner } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import './Login.scss'
@@ -25,9 +25,8 @@ const Login = () => {
 
     e.preventDefault();
     try{
-      
-      const response = await loginHandler(dispatch,{username, password})
       setLoading(true)
+      const response = await loginHandler(dispatch,{username, password})
       navigate(`/guide`)
 
     } catch (error) {
@@ -63,9 +62,9 @@ const Login = () => {
                       value={password}  onChange={(e)=>setPassword(e.target.value)}/>
                   </div>
               
-                    <button type="submit" className="btn btn-dark w-100">{loading ? (<>Loading</>) : <>Login</>}</button>   
+                    <button type="submit" className="btn btn-dark w-100">{loading ? (<Spinner animation="border" size='sm' variant="light" />) : <>Login</>}</button>   
                 </form>
-                <p className='text-center pt-3'>Baru di HikerSummit ?<b> <Link to="/register">Sign Up</Link></b></p>
+                <p className='text-center pt-3'>Baru di HikerSummit ?<b> <Link style={{ color:"orange", fontWeight:"500" }} to="/register">Sign Up</Link></b></p>
         </div>
         </div>
    </div>

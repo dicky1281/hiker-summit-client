@@ -63,17 +63,15 @@ const BeingGuide = () => {
   const onSubmit = async() =>{
        
    
-    const response = await privateInstance.post(`/api/v1/guides/${user._id}`,guide)
-    console.log(response)
+    await privateInstance.post(`/api/v1/guides/${user._id}`,guide)
     setModalShow(true)
         
        
     }
-    console.log(guide)
   return (
     <>
     <div className="jadi-pemandu d-flex">
-    <Form className='col-lg-5 col-md-12'>
+    <Form className='col-lg-5 col-md-12' onSubmit={onSubmit}>
   <fieldset>
     <Form.Group className="mb-3">
       <Form.Label htmlFor="disabledSelect">Pilih Gunung Tujuan</Form.Label>
@@ -96,16 +94,16 @@ const BeingGuide = () => {
     <Form.Label htmlFor="disabledSelect">Pengalaman Mendaki</Form.Label>
       <Form.Control type='number' min="1" max="10" placeholder="Berapa Tahun ?" className='mb-3' required onChange={(event) => {setGuide((prev)=>({...prev,hiking_experience:event.target.value}))}}/>
     <Form.Label htmlFor="disabledSelect">Maksimal Pendaki Yang Disanggupi</Form.Label>
-      <Form.Control type='number' min="1" max="10" placeholder="Berapa Pendaki ?" className='mb-3'required onChange={(event) => {setGuide((prev)=>({...prev,allowed_hiker_count:event.target.value}))}}/>
+      <Form.Control type='number' min="1" max="10" placeholder="Berapa Pendaki ?" className='mb-3' required onChange={(event) => {setGuide((prev)=>({...prev,allowed_hiker_count:event.target.value}))}}/>
  
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1"/>
     <Form.Label>Tentang Anda</Form.Label>
-    <Form.Control as="textarea" className='mb-3' rows={3} onChange={(event) => {setGuide((prev)=>({...prev,note:event.target.value}))}}/>
+    <Form.Control required as="textarea" className='mb-3' rows={3} onChange={(event) => {setGuide((prev)=>({...prev,note:event.target.value}))}}/>
 
     <Form.Group className="mb-3" id="formGridCheckbox">
     <Form.Check type="checkbox" label="Saya setuju bahwa pemandu ditentukan oleh pihak HikerSummit yang telah disiapkan sebaik-mungkin." required />
   </Form.Group>
-    <Button variant='success' className='mb-3' onClick={onSubmit}>Ajukan</Button>
+    <Button variant='success' className='mb-3' type='submit'>Ajukan</Button>
   </fieldset>
 </Form>
 

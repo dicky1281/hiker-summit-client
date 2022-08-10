@@ -157,40 +157,40 @@ const PopUp = (props) => {
           <div className="perhatian">
             <h4>Perhatian</h4>
             {props.perh && Object.values(props.perh).map((ele ,index)=>(
-              <>
+              <React.Fragment key={index}>
               <li>{ele}</li>
-              </>
+              </React.Fragment>
             ))}
           </div>
           <div className="kewajiban pt-3">
             <h4>Kewajiban</h4>
             {props.kew && Object.values(props.kew).map((ele,index)=>(
-              <>
+              <React.Fragment key={index}>
               <li>{ele}</li>
-              </>
+              </React.Fragment>
             ))}
           </div>
           <div className="larangan pt-3">
             <h4>Larangan</h4>
             {props.lar && Object.values(props.lar).map((ele,index)=>(
-              <>
+              <React.Fragment key={index}>
               <li>{ele}</li>
-              </>
+              </React.Fragment>
             ))}
           </div>
           <div className="track">
             {props.jal?.track.map((item, index)=>(
-              <>
+              <React.Fragment key={index}>
               <h4 className="pt-3">Track ke : {index+1}</h4>
               <li>Nama Track: {item.track_name}</li>
-              </>
+              </React.Fragment>
             ))}
           </div>
           <div className="gambar">
           {props.gambs?.image_assets?.assets_key.map((lel, index)=>(
-            <>
-             <img src={`/api/v1/assets?bucket=${props.gambs?.image_assets.bucket}&key=${lel}`} alt="" />
-            </>
+            <React.Fragment key={index}>
+             <img src={`https://hiker-summit.herokuapp.com/api/v1/assets?bucket=${props.gambs?.image_assets.bucket}&key=${lel}`} alt="" />
+            </React.Fragment>
           ))}
 
           </div>

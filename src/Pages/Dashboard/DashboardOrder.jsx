@@ -62,11 +62,12 @@ function DashboardOrder() {
   }, []);
 
   const guideUser = guide?.filter((ele) => ele.user_id === user._id);
-  const finalGuideBook = allBook?.filter(
-    (ele) => ele.hiker_count <= guideUser?.[0]?.allowed_hiker_count && ele.user_id !== user._id
-  );
+  const finalGuideBook = allBook?.filter((ele)=> ele.destination_id === guideUser?.[0]?.destination_id).filter((a)=> a.hiker_count <= guideUser?.[0]?.allowed_hiker_count)
+ 
 
-  console.log(guide)
+
+
+ 
 
   const handleSend = async (id) => {
     const data = new FormData();
@@ -220,7 +221,7 @@ function DashboardOrder() {
                       const a = container.filter(
                         (data) => data?._id === item?.destination_id
                       );
-                      console.log(book);
+                    
                       return (
                         <React.Fragment key={index}>
                           <tr>
@@ -308,7 +309,7 @@ function DashboardOrder() {
                       const b = container.filter(
                         (ele) => ele._id === item.destination_id
                       );
-                      console.log(b)
+                    
                       return (
                         <React.Fragment key={index}>
                           <tr>

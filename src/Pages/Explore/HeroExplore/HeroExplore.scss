@@ -12,14 +12,24 @@
   span {
     font-family: "Quicksand", sans-serif;
     color: orange;
-    font-size: 8.4vh;
+    font-size: 3.4vw;
     font-style: normal;
     font-weight: 700;
     filter: brightness(100%);
   }
+  @media (max-width: 780px) {
+    text-align: center;
+    
+    h1{
+      font-size: 4.1vh !important;
+    }
+    span{
+      font-size: 4.1vh !important;
+    }
+  }
   h1 {
     color: white;
-    font-size: 8.4vh;
+    font-size: 3.4vw;
     font-style: normal;
     font-weight: 700;
   }

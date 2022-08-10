@@ -19,6 +19,7 @@ import { useSelector } from "react-redux";
 import "./Carousels.scss";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import ReactStars from "react-rating-stars-component";
+import moment from "moment";
 
 const Destination = () => {
   const [key, setKey] = useState("informasiUmum");
@@ -69,26 +70,25 @@ const Destination = () => {
     })();
   }, [params]);
 
-  console.log(rate);
-
   const AddReview = async (e) => {
     e.preventDefault();
     try {
-      const response = await privateInstance.post(
+      await privateInstance.post(
         `/api/v1/reviews/${user._id}?destination_id=${params.id}`,
         formData
       );
-      console.log(response);
-      window.location.reload(false)
+
+      window.location.reload(false);
     } catch (error) {
       alert(error);
     }
   };
 
-  const handleTicket = async() =>{
-    await privateInstance.post(`/api/v1/tickets/user/${user._id}`, ticket)
-    window.location.reload(false)
-  }
+  const handleTicket = async () => {
+    await privateInstance.post(`/api/v1/tickets/user/${user._id}`, ticket);
+    window.location.reload(false);
+  };
+
 
   return (
     <>
@@ -96,11 +96,11 @@ const Destination = () => {
         <section className="destination">
           <Carousel>
             {data?.content?.image_assets?.assets_key?.map((lel, index) => (
-              <Carousel.Item>
+              <Carousel.Item key={index}>
                 <img
                   className="d-block w-100"
                   style={{ height: "100vh" }}
-                  src={`/api/v1/assets?bucket=${data.content.image_assets.bucket}&key=${lel}`}
+                  src={`https://hiker-summit.herokuapp.com/api/v1/assets?bucket=${data.content.image_assets.bucket}&key=${lel}`}
                   alt="First slide"
                 />
               </Carousel.Item>
@@ -118,14 +118,14 @@ const Destination = () => {
                   <InformasiUmum
                     title={data.title}
                     general_information={data.content?.general_information}
-                    gambar={`/api/v1/assets?bucket=${data?.content?.image_assets?.bucket}&key=${data?.content?.image_assets?.assets_key[0]}`}
+                    gambar={`https://hiker-summit.herokuapp.com/api/v1/assets?bucket=${data?.content?.image_assets?.bucket}&key=${data?.content?.image_assets?.assets_key[0]}`}
                     clicks={handleShow2}
                   />
                   <div className="comment-section">
                     <div className="container">
-                      <div class="review">
+                      <div className="review">
                         <div className="review-aksi d-flex">
-                          <h2 class="R-title">Ulasan</h2>
+                          <h2 className="R-title">Ulasan</h2>
                           {user === null ? (
                             ""
                           ) : (
@@ -134,21 +134,22 @@ const Destination = () => {
                             </Button>
                           )}
                         </div>
-                        <hr style={{ color : "black", height:"2px"
-         }} />
+                        <hr style={{ color: "black", height: "2px" }} />
 
-                        <div class="comment-section">
+                        <div className="comment-section">
                           {loading ? (
                             <p>Loading</p>
                           ) : (
                             <>
-                              {rate.map((item, index) => {
-                                const gg = nameUser.filter(
+                              {rate?.map((item, index) => {
+                                const gg = nameUser?.filter(
                                   (ele) => ele._id === item.user_id
                                 );
-                                console.log(gg);
+                                console.log(nameUser)
+                                console.log(rate)
+                               
                                 return (
-                                  <>
+                                  <React.Fragment key={index}>
                                     <div class="media media-review mb-3">
                                       <div className="media-user mb-2">
                                         <img
@@ -157,7 +158,7 @@ const Destination = () => {
                                             null ? (
                                               <p>kosong</p>
                                             ) : (
-                                              `/api/v1/assets?bucket=${gg[0].image_assets.bucket}&key=${gg[0].image_assets.assets_key}`
+                                              `https://hiker-summit.herokuapp.com/api/v1/assets?bucket=${gg[0].image_assets.bucket}&key=${gg[0].image_assets.assets_key}`
                                             )
                                           }
                                           alt=""
@@ -174,68 +175,71 @@ const Destination = () => {
                                             <span>
                                               {gg[0].first_name}{" "}
                                               {gg[0].last_name}
+                                              <br />
+                                              <p className="pt-2" style={{ fontSize:"15px" }}>{moment(item.createdAt).format('LLL')}</p>
                                             </span>
                                           </h2>
+                                          
                                           <div className="rating-row">
                                             <ul>
                                               {item.rating === 1 ? (
-                                                <li class="">
-                                                  <i class="fa fa-star"></i>
+                                                <li className="">
+                                                  <i className="fa fa-star"></i>
                                                 </li>
                                               ) : item.rating === 2 ? (
                                                 <>
                                                   {" "}
-                                                  <li class="">
-                                                    <i class="fa fa-star"></i>
+                                                  <li className="">
+                                                    <i className="fa fa-star"></i>
                                                   </li>
                                                   <li className="">
-                                                    <i class="fa fa-star"></i>
+                                                    <i className="fa fa-star"></i>
                                                   </li>
                                                 </>
                                               ) : item.rating === 3 ? (
                                                 <>
                                                   {" "}
-                                                  <li class="">
-                                                    <i class="fa fa-star"></i>
+                                                  <li className="">
+                                                    <i className="fa fa-star"></i>
                                                   </li>
                                                   <li className="">
-                                                    <i class="fa fa-star"></i>
+                                                    <i className="fa fa-star"></i>
                                                   </li>
-                                                  <li class="">
-                                                    <i class="fa fa-star"></i>
+                                                  <li className="">
+                                                    <i className="fa fa-star"></i>
                                                   </li>
                                                 </>
                                               ) : item.rating === 4 ? (
                                                 <>
-                                                  <li class="">
-                                                    <i class="fa fa-star"></i>
+                                                  <li className="">
+                                                    <i className="fa fa-star"></i>
                                                   </li>
-                                                  <li class="">
-                                                    <i class="fa fa-star"></i>
+                                                  <li className="">
+                                                    <i className="fa fa-star"></i>
                                                   </li>
-                                                  <li class="">
-                                                    <i class="fa fa-star"></i>
+                                                  <li className="">
+                                                    <i className="fa fa-star"></i>
                                                   </li>
-                                                  <li class="">
-                                                    <i class="fa fa-star"></i>
+                                                  <li className="">
+                                                    <i className="fa fa-star"></i>
                                                   </li>
                                                 </>
                                               ) : (
                                                 <>
-                                                  <li class="">
-                                                    <i class="fa fa-star"></i>
+                                                  <li className="">
+                                                    <i className="fa fa-star"></i>
+                                                  </li>
+                                                  <li className="">
+                                                    <i className="fa fa-star"></i>
                                                   </li>
                                                   <li class="">
                                                     <i class="fa fa-star"></i>
                                                   </li>
-                                                  <li class="">
-                                                    <i class="fa fa-star"></i>
+                                                  <li className="">
+                                                    <i className="fa fa-star"></i>
                                                   </li>
-                                                  <li class="">
-                                                    <i class="fa fa-star"></i>
-                                                  </li>
-                                                  <li class="">
-                                                    <i class="fa fa-star"></i>
+                                                  <li className="">
+                                                    <i className="fa fa-star"></i>
                                                   </li>
                                                 </>
                                               )}
@@ -246,9 +250,10 @@ const Destination = () => {
                                         <div class="description p-2">
                                           {item.description}
                                         </div>
+                                        
                                       </div>
                                     </div>
-                                  </>
+                                  </React.Fragment>
                                 );
                               })}
                             </>
@@ -265,59 +270,58 @@ const Destination = () => {
                   <Lokasi konten={data} judul={data} />
                 </Tab>
                 <Tab eventKey="aksebilitas" title="Aksebilitas">
-                  <Aksebilitas judul={data} konten={data}/>
+                  <Aksebilitas judul={data} konten={data} />
                 </Tab>
               </Tabs>
             </Container>
           </div>
           <Modal show={show} onHide={handleClose} centered>
-        <Modal.Body>
-        <Modal.Title className="text-center">Give Us Your Review</Modal.Title>
-          <div className="rate">
-
-         
-          <ReactStars
-    count={5}
-    onChange={(newRating) =>
-      setFormData({ ...formData, rating:  newRating})}
-    size={60}
-    activeColor="#ffd700"
-  
-  /> </div>
-          <Form.Label column sm="4">
-            Judul
-          </Form.Label>
-          <Form.Control
-            type="text"
-            onChange={(event) =>
-              setFormData({ ...formData, title: event.target.value })
-            }
-          />
-          <Form.Label column sm="4">
-            Deskripsi
-          </Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            onChange={(event) =>
-              setFormData({ ...formData, description: event.target.value })
-            }
-          />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={AddReview}>
-            Submit
-          </Button>
-        </Modal.Footer>
-      </Modal>
-       
+            <Modal.Body>
+              <Modal.Title className="text-center">
+                Give Us Your Review
+              </Modal.Title>
+              <div className="rate">
+                <ReactStars
+                  count={5}
+                  onChange={(newRating) =>
+                    setFormData({ ...formData, rating: newRating })
+                  }
+                  size={60}
+                  activeColor="#ffd700"
+                />{" "}
+              </div>
+              <Form.Label column sm="4">
+                Judul
+              </Form.Label>
+              <Form.Control
+                type="text"
+                onChange={(event) =>
+                  setFormData({ ...formData, title: event.target.value })
+                }
+              />
+              <Form.Label column sm="4">
+                Deskripsi
+              </Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                onChange={(event) =>
+                  setFormData({ ...formData, description: event.target.value })
+                }
+              />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={AddReview}>
+                Submit
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </section>
-        
       )}
-    
+
       <Modal show={show2} onHide={handleClose2} centered>
         <Modal.Header closeButton>
           <Modal.Title className="text-center">
@@ -350,7 +354,7 @@ const Destination = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleTicket }>
+          <Button variant="primary" onClick={handleTicket}>
             Kirim
           </Button>
         </Modal.Footer>

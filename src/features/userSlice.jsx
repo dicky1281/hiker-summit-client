@@ -27,6 +27,10 @@ const userSlice = createSlice({
           wishlist: (state, action) =>{
             state.user.destination_wishlist.push(action.payload)
           },
+          wishlistRemove: (state,action)=>{
+            const selected = state.user.destination_wishlist.indexOf(action.payload)
+            state.user.destination_wishlist.splice(selected,1)
+          },
         verify:(state, action)=>{
           state.user.verified = action.payload
         },
@@ -35,6 +39,6 @@ const userSlice = createSlice({
         }
     }
 })
-export const {login,logout,name, lastName, phone, username,wishlist, verify, updateProfilePicture} = userSlice.actions;
+export const {login,logout,name, lastName, phone, username,wishlist, verify, updateProfilePicture, wishlistRemove} = userSlice.actions;
 export default userSlice.reducer;
 

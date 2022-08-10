@@ -60,7 +60,8 @@ const GuideBook = () => {
       arrival:""
     },
     hiker_count:null,
-    note:""
+    note:"",
+    amount:0
   })
 
   const [destination, setDestination] = useState([])
@@ -114,7 +115,7 @@ const GuideBook = () => {
   var a = new Date(book.date.arrival)
   var b = new Date (book.date.departure)
   var c = a.getTime() - b.getTime()
-  var d = c / (1000 * 3600 * 24 )
+  var d = c / (1000 * 3600 * 24 ) + 1
 
 
   return (

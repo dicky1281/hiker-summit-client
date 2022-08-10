@@ -136,7 +136,7 @@ const onSave3 = (event) =>{
     ))}
     <div className="tombol-aksi pt-2 pb-3">
     <button type='button' className='btn btn-success'  onClick={()=> handleAddFields()}>+</button>
-      {inputField.length === 1 ? '' : <button type='button' className='btn btn-danger' onClick={()=> handleDeleteFields()}>-</button>}
+      {inputField.length === 1 ? '' : <button type='button' style={{ marginLeft:"5px" }}zx className='btn btn-danger' onClick={()=> handleDeleteFields()}>-</button>}
       </div> 
     
     <br></br>
@@ -154,7 +154,7 @@ const onSave3 = (event) =>{
     ))} 
        <div className="tombol-aksi pt-2 pb-3">
     <button type='button' className='btn btn-success'  onClick={()=> handleAddFields2()}>+</button>
-    {inputField2.length === 1 ? '' : <button type='button' className='btn btn-danger' onClick={()=> handleDeleteFields2()}>-</button>}
+    {inputField2.length === 1 ? '' : <button type='button' style={{ marginLeft:"5px" }} className='btn btn-danger' onClick={()=> handleDeleteFields2()}>-</button>}
       </div> 
       <br />
 
@@ -171,7 +171,7 @@ const onSave3 = (event) =>{
     ))} 
      <div className="tombol-aksi pt-2 pb-3">
     <button type='button' className='btn btn-success'  onClick={()=> handleAddFields3()}>+</button>
-    {inputField3.length === 1 ? '' : <button type='button' className='btn btn-danger' onClick={()=> handleDeleteFields3()}>-</button>}
+    {inputField3.length === 1 ? '' : <button type='button' style={{ marginLeft:"5px" }} className='btn btn-danger' onClick={()=> handleDeleteFields3()}>-</button>}
       </div>
       <div className='next-prev'>
    <Button variant='warning' type='submit'>Lanjut</Button>

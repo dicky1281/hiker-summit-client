@@ -17,7 +17,7 @@ const Cards = (props) => {
        
          
           <Card.Body>
-          <div className="bookmark"><button type='button' onClick={props.aksi}><i className="fas fa-bookmark" ></i></button></div>
+          <div className="bookmark" style={{ display:props.stats }}><button type='button' onClick={props.aksi}><i style={{ color:props.warna }} className="fas fa-bookmark" ></i></button></div>
           {/* <div className="bookmark"><i className="fas fa-bookmark" onClick={props.aksi}></i></div> */}
            {/* <div className="category" style={kesulitan === "ahli" ? {backgroundColor:"red"}:kesulitan === "menengah" ? {backgroundColor:"orange"}:{backgroundColor:"greenyellow"}}><h4>{props.kesulitan}</h4></div> */}
            <Button variant={kesulitan === "ahli" ? "danger" : kesulitan === "menengah" ? "warning" : "success"}>{props.kesulitan}</Button>

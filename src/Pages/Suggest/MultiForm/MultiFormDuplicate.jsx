@@ -4,6 +4,7 @@ import "./MultiForm.scss";
 import { FirstForm } from "./FirstForm";
 import { SecondForm } from "./SecondForm";
 import { ThirdForm } from "./ThirdForm";
+import { useEffect } from "react";
 
 const MultiForm = () => {
   const [step, setstep] = useState(1);
@@ -48,11 +49,10 @@ const MultiForm = () => {
   const prevStep = () => {
     setstep(step - 1);
   };
+  console.log(formData);
 
-  console.log(formData)
-
-   //Add field
-   const handleAddFields = (index) => {
+  //Add field
+  const handleAddFields = (index) => {
     setFormData((prev) => ({
       ...prev,
       location: {
@@ -82,11 +82,10 @@ const MultiForm = () => {
       ...prev,
       location: {
         ...prev.location,
-        track: [...prev.location.track].splice(index, 1),
+        track: [...prev.location.track.splice(index, 1)],
       },
     }));
   };
-
   switch (step) {
     // case 1 to show stepOne form and passing nextStep, prevStep, and handleInputData as handleFormData method as prop and also formData as value to the fprm
     case 1:
@@ -99,9 +98,8 @@ const MultiForm = () => {
               <li>Track Menuju Gunung</li>
             </ul>
             <Row>
-            {formData?.location?.track.map((item, index) => (
+              {formData?.location?.track.map((item, index) => (
                 <div key={index}>
-                  <h2>Jalur Ke {index + 1}</h2>
                   <Form.Group className="mb-3">
                     <Form.Label>Nama Track</Form.Label>
                     <Form.Control
@@ -238,13 +236,13 @@ const MultiForm = () => {
                   -
                 </button>
               )}
-              {/* <FirstForm
+
+              {/* <ThirdForm
                 nextStep={nextStep}
                 prevStep={prevStep}
                 formData={formData}
                 setFormData={setFormData}
                 image={image}
-                setImage={setImage}
               /> */}
             </Row>
           </Container>
@@ -261,7 +259,6 @@ const MultiForm = () => {
               <li>Track Menuju Gunung</li>
             </ul>
             <Row>
-           
               <SecondForm
                 nextStep={nextStep}
                 prevStep={prevStep}
@@ -282,15 +279,7 @@ const MultiForm = () => {
               <li>Hal-Hal Yang Perlu Diperhatikan</li>
               <li className="active">Track Menuju Gunung</li>
             </ul>
-            <Row>
-              <ThirdForm
-                nextStep={nextStep}
-                prevStep={prevStep}
-                formData={formData}
-                setFormData={setFormData}
-                image={image}
-              />
-            </Row>
+            <Row></Row>
           </Container>
         </div>
       );

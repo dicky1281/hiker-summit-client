@@ -18,7 +18,7 @@ const Search = (props) => {
     },[dispatch])
 
 
-    const container = destinations?.filter(name => name.status === "active") 
+    const container = destinations?.filter(name => name.approved === "approved") 
     const searchText = (event) =>{
         setSort(event.target.value);
       }
@@ -36,7 +36,7 @@ const Search = (props) => {
   
         return(
           <React.Fragment key={item.id}>
-          <Cards  going={`/explore/${item._id}`} imgs={`/api/v1/assets?bucket=${item.content.image_assets.bucket}&key=${item.content.image_assets.assets_key[0]}`}  mouname={item.title} lokasi={item.location.province} kesulitan={item.difficulty}/>
+          <Cards  going={`/explore/${item._id}`} imgs={`http://localhost:5000/api/v1/assets?bucket=${item.content.image_assets.bucket}&key=${item.content.image_assets.assets_key[0]}`}  mouname={item.title} lokasi={item.location.province} kesulitan={item.difficulty}/>
   
           </React.Fragment>
         )

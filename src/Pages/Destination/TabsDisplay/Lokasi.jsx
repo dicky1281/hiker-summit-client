@@ -13,13 +13,17 @@ const Lokasi = (props) => {
                 <div className="lokasi-wrapper">
                   {props.konten?.location?.track.map((item, index)=>(
                     <React.Fragment key={index}>
-                    <h3 className='pt-4'>Jalur Pendakian Via {item.track_name}</h3>
+                      <div className="lokasi-domain">
+
+                     
+                    <h3>Jalur Pendakian Via {item.track_name}</h3>
                     <div className="lokasi-content">
                         <div className="lokasi-detail">
                         <h3>{item.basecamp_name}</h3>
-                        <h4>{item.village}, Kecamatan {item.ward}, {props.konten?.location?.province}, {item.postal_code}</h4>
+                        <h4>Desa {item.village}, Kecamatan {item.ward}, {props.konten?.location?.province}, {item.postal_code}</h4>
                         <h4>Telp : 0{item.phone_number}</h4>
                         </div>      
+                    </div>
                     </div>
                     </React.Fragment>
                   ))}

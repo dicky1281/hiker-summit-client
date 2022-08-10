@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Navigation.scss";
 import { Nav, Navbar, Container, Offcanvas, Button, NavDropdown } from "react-bootstrap";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutHandler } from "../../../apiCalls/apiCalls";
 
@@ -22,6 +22,10 @@ const Navigation = () => {
 
   window.addEventListener('scroll', handleScroll)
 
+  const location = useLocation();
+  const path = location.pathname.split('/')
+
+
   const Logout = () => {
     logoutHandler(dispatch);
     navigate('/home')
@@ -29,7 +33,7 @@ const Navigation = () => {
 
 
   return (
-    <header className={scroll ? "fixed-top sticky" : "fixed-top"}>
+    <header className={scroll ? "fixed-top sticky" : "fixed-top"} style={{ backgroundColor : path.includes('search') || (path.includes('explore') && path.length > 2) ? "#417269" : "transparent", padding : path.includes('search') ? "0px 0px" : ""}}>
       <Navbar key={expand} expand={expand}>
         <Container>
           <Navbar.Brand><NavLink to='/home'>HikerSummit</NavLink></Navbar.Brand>
@@ -63,7 +67,7 @@ const Navigation = () => {
                  <NavLink to="/login">
                   <Button
                   variant="warning"
-                  style={{ color: "white", background: "orange" }}
+                  style={{ color: "white", background: "#E98B00",border:"none" }}
                 >
                   Login
                 </Button></NavLink>
@@ -77,7 +81,7 @@ const Navigation = () => {
                 id={`offcanvasNavbarDropdown-expand-${expand}`}
               >
                
-                <NavDropdown.Item><NavLink to={`/dashboard/akun/${user._id}`} style={{ color:"black" }}>My Dashboard</NavLink></NavDropdown.Item>
+                <Link className="dropdown-item" to={`/dashboard/akun/${user._id}`} style={{ color:"black" }}>My Dashboard</Link>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={Logout} style={{ color:"red" }}>Logout</NavDropdown.Item>
                 

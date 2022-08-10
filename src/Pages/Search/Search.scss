@@ -1,5 +1,5 @@
 .search-content{
-    height: 45vh;
+    height: 35vh;
     margin-bottom: 50px;
     display: flex;
     justify-content: end;
@@ -43,5 +43,6 @@
     .container{
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
     }
 }

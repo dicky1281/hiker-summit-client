@@ -29,6 +29,7 @@ export const FirstForm = ({ formData, setFormData, nextStep,image,setImage }) =>
   const ui = desti?.filter((name) => name?.title === formData.title);
 
 
+console.log(image)
 
   const submitFormData = (e) => {
     e.preventDefault();
@@ -179,7 +180,7 @@ export const FirstForm = ({ formData, setFormData, nextStep,image,setImage }) =>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Masukkan Gambar Gunung</Form.Label>
           
-                <Form.Control accept=".png, .jpeg, .jpg, .pdf" multiple type="file"  onChange={(event)=> setImage(event.target.files)}/>
+                <Form.Control accept=".png, .jpeg, .jpg" multiple type="file" required onChange={(event)=> setImage(event.target.files)}/>
             </Form.Group>
         <div className="next-prev">
           <Button variant="warning" type="button" onClick={submitFormData}>

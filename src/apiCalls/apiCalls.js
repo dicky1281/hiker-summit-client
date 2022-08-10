@@ -8,7 +8,6 @@ export const loginHandler = async (dispatch, userData) => {
       userData
     );
     dispatch(login(data));
-    console.log(data);
   } catch (error) {
     alert("username or password wrong");
   }
@@ -26,7 +25,6 @@ export const logoutHandler = async (dispatch) => {
 export const PutHandler = async (dispatch, AxiosPrivate, user, userData) => {
   try {
     await AxiosPrivate.put(`/api/v1/users/${user._id}`, userData);
-    alert("Profile Updated!");
   } catch (error) {
     alert(error);
   }

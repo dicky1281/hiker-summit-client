@@ -25,7 +25,7 @@ const Aksebilitas = (props) => {
                     {item?.accessibility && Object.values(item.accessibility).map((ele)=>(
                       <>
                   
-                      <p>{ele}</p>
+                      <li>{ele}</li>
                       </>
                     ))}
                     </React.Fragment>

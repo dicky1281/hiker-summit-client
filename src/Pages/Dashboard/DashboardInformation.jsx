@@ -116,10 +116,9 @@ const DashboardInformation = () => {
                 <tbody>
                   {desti
                     .filter((id) => id.user_id === user._id)
-                    .map((item) => {
-                  console.log(item)
+                    .map((item,index) => {
                       return (
-                        <React.Fragment key={item.index}>
+                        <React.Fragment key={index}>
                           <tr>
                             <td>Menyarankan Informasi Gunung</td>
                             <td>{item.createdAt}</td>
@@ -169,10 +168,9 @@ const DashboardInformation = () => {
                         </React.Fragment>
                       );
                     })}
-                    {guide?.filter((id)=> id.user_id === user._id).map((item)=>{
-                      console.log(guide?.filter((id)=> id.user_id === user._id))
+                    {guide?.filter((id)=> id.user_id === user._id).map((item,index)=>{
                       return(
-                        <>
+                        <React.Fragment key={index}>
                         {item.status === 'unactive' ? (<tr>
                         <td>Mengajukan Sebagai Guide</td>
                         <td>{item.createdAt}</td>
@@ -185,7 +183,7 @@ const DashboardInformation = () => {
                                 <td></td>
                       </tr>):''}
                          
-                        </>
+                        </React.Fragment>
                        
 
                       )

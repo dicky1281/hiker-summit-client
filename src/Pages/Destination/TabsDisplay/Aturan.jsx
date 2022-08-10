@@ -8,7 +8,6 @@ const Aturan = (props) => {
       <hr style={{ color : "black", height:"5px"
          }} />
          <div className="aturan">
-            <img src="../img/Conference-pana.png" alt="" />
             <Container>
             <Accordion>
                   <Accordion.Item eventKey="0">

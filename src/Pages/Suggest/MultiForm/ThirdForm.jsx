@@ -49,16 +49,15 @@ export const ThirdForm = ({ formData, setFormData, image, prevStep }) => {
   ]);
 
   const [combine, setCombine] = useState({});
+  console.log(combine)
 
   const handleSubmit = () => {
-    console.log("clicked");
     setFormData((prev) => ({
       ...prev,
       location: { ...prev.location, track: Object.values(combine) },
     }));
-    console.log(inputField);
   };
-  console.log(formData);
+
   const handleAddFields = (index) => {
     setInputField([
       ...inputField,
@@ -77,18 +76,6 @@ export const ThirdForm = ({ formData, setFormData, image, prevStep }) => {
     ]);
   };
 
-
-  const addBranch = () => {
-    setInputField([
-      ...inputField,
-      {
-        accessibility: { 2: "" },
-      },
-    ]);
-  };
-
-  console.log(inputField);
-
   const handleDeleteFields = (index) => {
     const values = [...inputField];
     values.splice(index, 1);
@@ -102,18 +89,19 @@ export const ThirdForm = ({ formData, setFormData, image, prevStep }) => {
   return (
     <>
     <Form onSubmit={Next}>
-      <h4>Masukan Track Yang Anda Ketahui</h4>
+      <h3>Masukan Track Yang Anda Ketahui</h3>
       <br />
       {inputField.map((inputField, index) => (
-        <div key={index}>
-          <h2>Jalur Ke {index + 1}</h2>
+        <div>
+          <h4>Jalur Ke {index + 1}</h4>
           <Form.Group className="mb-3">
             <Form.Label>Nama Track</Form.Label>
             <Form.Control
-              id={`${index}`}
+              id={index}
               type="text"
               name="track_name"
-         
+          
+              
               required
               onChange={(e) =>
                 setCombine((prev) => ({
@@ -129,7 +117,7 @@ export const ThirdForm = ({ formData, setFormData, image, prevStep }) => {
           <Form.Group className="mb-3">
             <Form.Label>Nama BaseCamp</Form.Label>
             <Form.Control
-              id={`${index}`}
+              id={index}
               type="text"
               name="basecamp_name"
      
@@ -368,6 +356,7 @@ export const ThirdForm = ({ formData, setFormData, image, prevStep }) => {
           type="button"
           className="btn btn-danger"
           onClick={() => handleDeleteFields()}
+          style={{ marginLeft:"5px" }}
         >
           -
         </button>}

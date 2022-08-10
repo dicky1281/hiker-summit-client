@@ -32,7 +32,7 @@ const SideBar = () => {
         <li className="profile">
           <div className="profile-details">
             <img
-              src={`/api/v1/assets?bucket=${user.image_assets.bucket}&key=${user.image_assets.assets_key}`}
+              src={`https://hiker-summit.herokuapp.com/api/v1/assets?bucket=user_assets&key=${user.image_assets.assets_key}`}
               alt="profileImg"
             />
             <div className="name_job">

@@ -2,7 +2,8 @@ import axios from 'axios'
 import { baseURL } from "../config";
 
 export const publicAxiosInstance = axios.create({
-    baseURL
+    baseURL,
+    withCredentials: true
 })
 
 export const privateAxiosInstance = axios.create({
@@ -12,5 +13,5 @@ export const privateAxiosInstance = axios.create({
     headers:{
         'Content-Type': 'application/json'
     },
-    // withCredentials: true
+    withCredentials: true
 })

@@ -48,7 +48,7 @@ function App() {
           <Route path="/" element={<Navigate to="/home"/>}/>
           <Route path="/home" element={<Home/>}/>
           <Route path="/explore/" element={<Explore/>}/>
-          <Route path="/search/" element={<Search/>}/>
+          <Route path="/search" element={<Search/>}/>
           <Route path="/explore/:id" element={<Destination/>}/>
   
           {/* Private */}

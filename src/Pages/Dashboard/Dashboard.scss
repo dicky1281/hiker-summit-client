@@ -180,7 +180,6 @@
 }
 .wishlist {
   position: relative;
-  display: flex;
   background: white;
   min-height: 100vh;
   top: 0;
@@ -193,6 +192,9 @@
     color: black;
     font-size: 28px;
     margin-left: 20px;
+  }
+  .wishlist-cards{
+   display: flex;
   }
 }
 @media (max-width: 500px) {

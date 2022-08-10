@@ -9,7 +9,10 @@ const InformasiUmum = (props) => {
       <hr style={{ color : "black", height:"5px"
          }} />
       <div className="square">
-          <img src={props.gambar} alt="" />
+        <div className="square-image">
+        <img src={props.gambar} alt="" />
+        </div>
+          
           <p>{props.general_information}</p>
       </div>
 
