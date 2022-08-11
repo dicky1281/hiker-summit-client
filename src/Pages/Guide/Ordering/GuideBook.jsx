@@ -64,6 +64,8 @@ const GuideBook = () => {
     amount:0
   })
 
+  console.log(book)
+
   const [destination, setDestination] = useState([])
   const [selected, setSelected] = useState([])
   const [track, setTrack] = useState(null)

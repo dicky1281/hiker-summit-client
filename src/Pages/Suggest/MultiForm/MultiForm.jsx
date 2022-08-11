@@ -34,7 +34,7 @@ const MultiForm = () => {
           village: "",
           ward: "",
           phone_number: "",
-          accessibility: { 1: "", 2: "", 3: "" },
+          accessibility: { 0: ""},
         },
       ],
     },
@@ -49,10 +49,10 @@ const MultiForm = () => {
     setstep(step - 1);
   };
 
-  console.log(formData)
+  // console.log(formData);
 
-   //Add field
-   const handleAddFields = (index) => {
+  //Add field
+  const handleAddFields = (index) => {
     setFormData((prev) => ({
       ...prev,
       location: {
@@ -69,22 +69,84 @@ const MultiForm = () => {
             village: "",
             ward: "",
             phone_number: "",
-            accessibility: { 1: "", 2: "", 3: "" },
+            accessibility: { 0: ""},
           },
         ],
       },
     }));
   };
 
+  console.log(formData);
+
   // delete Field
-  const handleDeleteFields = (index) => {
-    setFormData((prev) => ({
-      ...prev,
-      location: {
-        ...prev.location,
-        track: [...prev.location.track].splice(index, 1),
-      },
-    }));
+  const handleDeleteFields = () => {
+    const baseDataset = { ...formData };
+    baseDataset.location.track.pop();
+    setFormData({ ...baseDataset });
+  };
+
+  const addTrack = (e) => {
+    const targetId = +e.target.id;
+    const baseDataset = { ...formData };
+    const targetArr = baseDataset.location.track.find((_, i) => i === targetId);
+    const modifiedState = { ...targetArr };
+
+    if (isNaN(e.target.name)) {
+      modifiedState[e.target.name] = e.target.value;
+    } else {
+      modifiedState["accessibility"][e.target.name] = e.target.value;
+    }
+
+    baseDataset.location.track = baseDataset.location.track.map((e, i) => {
+      if (i === targetId) {
+        return modifiedState;
+      } else {
+        return e;
+      }
+    });
+
+    setFormData({ ...baseDataset });
+  };
+
+  const addAccessibilityField = (e) => {
+    const targetId = +e.target.id;
+    const baseDataset = { ...formData };
+    const targetArr = baseDataset.location.track.find((_, i) => i === targetId);
+
+    targetArr.accessibility = {
+      ...targetArr.accessibility,
+      [String(Object.entries(targetArr.accessibility).length + 1)]: "",
+    };
+
+    baseDataset.location.track = baseDataset.location.track.map((e, i) => {
+      if (i === targetId) {
+        return targetArr;
+      } else {
+        return e;
+      }
+    });
+
+    setFormData({ ...baseDataset });
+  };
+
+  const removeAccessibilityField = (e) => {
+    const targetId = +e.target.id;
+    const baseDataset = { ...formData };
+    const targetArr = baseDataset.location.track.find((_, i) => i === targetId);
+
+    delete targetArr.accessibility[
+      String(Object.entries(targetArr.accessibility).length)
+    ];
+
+    baseDataset.location.track = baseDataset.location.track.map((e, i) => {
+      if (i === targetId) {
+        return targetArr;
+      } else {
+        return e;
+      }
+    });
+
+    setFormData({ ...baseDataset });
   };
 
   switch (step) {
@@ -105,10 +167,11 @@ const MultiForm = () => {
                   <Form.Group className="mb-3">
                     <Form.Label>Nama Track</Form.Label>
                     <Form.Control
-                      id={index}
+                      id={`${index}`}
                       type="text"
                       name="track_name"
                       required
+                      onChange={addTrack}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3">
@@ -118,6 +181,7 @@ const MultiForm = () => {
                       type="text"
                       name="basecamp_name"
                       required
+                      onChange={addTrack}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3">
@@ -128,6 +192,7 @@ const MultiForm = () => {
                       rows={3}
                       required
                       name="description"
+                      onChange={addTrack}
                     />
                   </Form.Group>
 
@@ -139,6 +204,7 @@ const MultiForm = () => {
                         type="text"
                         required
                         name="district"
+                        onChange={addTrack}
                       />
                     </Form.Group>
                     <Form.Group as={Col} md="4" className="mb-3">
@@ -147,6 +213,7 @@ const MultiForm = () => {
                         id={`${index}`}
                         type="text"
                         required
+                        onChange={addTrack}
                         name="road_name"
                       />
                     </Form.Group>
@@ -157,6 +224,7 @@ const MultiForm = () => {
                         type="text"
                         name="village"
                         required
+                        onChange={addTrack}
                       />
                     </Form.Group>
                   </Row>
@@ -168,6 +236,7 @@ const MultiForm = () => {
                         type="text"
                         required
                         name="ward"
+                        onChange={addTrack}
                       />
                     </Form.Group>
                     <Form.Group as={Col} md="4" className="mb-3">
@@ -177,6 +246,7 @@ const MultiForm = () => {
                         type="number"
                         required
                         name="postal_code"
+                        onChange={addTrack}
                       />
                     </Form.Group>
                     <Form.Group as={Col} md="4" className="mb-3">
@@ -186,58 +256,45 @@ const MultiForm = () => {
                         type="number"
                         required
                         name="phone_number"
+                        onChange={addTrack}
                       />
                     </Form.Group>
                   </Row>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Akses Manuju Jalur 1</Form.Label>
-                    <Form.Control
-                      id={`${index}`}
-                      required
-                      as="textarea"
-                      rows={3}
-                      name={`1`}
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Akses Manuju Jalur 2 (optional)</Form.Label>
-                    <Form.Control
-                      id={`${index}`}
-                      as="textarea"
-                      rows={3}
-                      name={`2`}
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Akses Manuju Jalur 3 (optional)</Form.Label>
-                    <Form.Control
-                      id={`${index}`}
-                      as="textarea"
-                      rows={3}
-                      name={`3`}
-                    />
-                  </Form.Group>
+                  {Object.entries(item.accessibility).map((e, i) => (
+                    <React.Fragment key={e[0] + i}>
+                      <Form.Group className="mb-3">
+                        <Form.Label>Akses Manuju Jalur {i + 1}</Form.Label>
+                        <Form.Control
+                          id={`${i}`}
+                          required
+                          as="textarea"
+                          rows={3}
+                          name={`${i}`}
+                          onChange={addTrack}
+                        />
+                      </Form.Group>
+                    </React.Fragment>
+                  ))}
+                  
+                  <button
+                    id={`${index}`}
+                    type="button"
+                    className="btn btn-success"
+                    onClick={addAccessibilityField}
+                  >
+                    add accessibility
+                  </button>
+                  {Object.entries(item.accessibility).length === 1 ? (""): <button
+                    id={`${index}`}
+                    type="button"
+                    className="btn btn-success"
+                    onClick={removeAccessibilityField}
+                  >
+                    remove accessibility
+                  </button>}
+                  
                 </div>
               ))}
-
-              <button
-                type="button"
-                className="btn btn-success"
-                onClick={handleAddFields}
-              >
-                +
-              </button>
-              {formData.location.track.length === 1 ? (
-                ""
-              ) : (
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={() => handleDeleteFields()}
-                >
-                  -
-                </button>
-              )}
               {/* <FirstForm
                 nextStep={nextStep}
                 prevStep={prevStep}
@@ -261,7 +318,6 @@ const MultiForm = () => {
               <li>Track Menuju Gunung</li>
             </ul>
             <Row>
-           
               <SecondForm
                 nextStep={nextStep}
                 prevStep={prevStep}
@@ -283,13 +339,14 @@ const MultiForm = () => {
               <li className="active">Track Menuju Gunung</li>
             </ul>
             <Row>
-              <ThirdForm
+           
+              {/* <ThirdForm
                 nextStep={nextStep}
                 prevStep={prevStep}
                 formData={formData}
                 setFormData={setFormData}
                 image={image}
-              />
+              /> */}
             </Row>
           </Container>
         </div>

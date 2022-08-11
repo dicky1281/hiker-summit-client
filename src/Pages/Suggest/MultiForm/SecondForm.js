@@ -60,7 +60,7 @@ const onSave = (event,index) =>{
   }))
 
 }
-console.log(inputField)
+
 
 const onSave2 = (event) =>{
   setFormData((prevState) => ({

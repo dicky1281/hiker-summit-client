@@ -50,6 +50,7 @@ export const ThirdForm = ({ formData, setFormData, image, prevStep }) => {
 
   const [combine, setCombine] = useState({});
   console.log(combine)
+  console.log(formData)
 
   const handleSubmit = () => {
     setFormData((prev) => ({
@@ -92,16 +93,15 @@ export const ThirdForm = ({ formData, setFormData, image, prevStep }) => {
       <h3>Masukan Track Yang Anda Ketahui</h3>
       <br />
       {inputField.map((inputField, index) => (
-        <div>
+        <React.Fragment key={index}>
           <h4>Jalur Ke {index + 1}</h4>
           <Form.Group className="mb-3">
             <Form.Label>Nama Track</Form.Label>
             <Form.Control
-              id={index}
+              id={`${index}`}
+
               type="text"
               name="track_name"
-          
-              
               required
               onChange={(e) =>
                 setCombine((prev) => ({
@@ -117,7 +117,7 @@ export const ThirdForm = ({ formData, setFormData, image, prevStep }) => {
           <Form.Group className="mb-3">
             <Form.Label>Nama BaseCamp</Form.Label>
             <Form.Control
-              id={index}
+              id={`${index}`}
               type="text"
               name="basecamp_name"
      
@@ -341,7 +341,7 @@ export const ThirdForm = ({ formData, setFormData, image, prevStep }) => {
                 />
               </Form.Group>
 
-        </div>
+        </React.Fragment>
       ))}
 
       <div className="tombol-aksi">
