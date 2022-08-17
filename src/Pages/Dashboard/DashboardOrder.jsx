@@ -151,7 +151,7 @@ function DashboardOrder() {
                       const a = container.filter(
                         (data) => data?._id === item?.destination_id
                       );
-                      
+                      console.log(book)
                       return (
                         <React.Fragment key={index}>
                           <tr>
@@ -334,6 +334,7 @@ function DashboardOrder() {
                 </Table>
 
                 <h2 className="title">Pesanan Menjadi Guide</h2>
+             
                 <Table responsive="lg text-center">
                   <thead>
                     <tr>
@@ -389,6 +390,7 @@ function DashboardOrder() {
                 </Table>
               </>
             )}
+            
           </Container>
           <Modal
             show={show4}

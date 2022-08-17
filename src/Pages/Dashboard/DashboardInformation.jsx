@@ -176,7 +176,7 @@ const DashboardInformation = () => {
                         <React.Fragment key={index}>
                         {item.status === 'unactive' ? (<tr>
                         <td>Mengajukan Sebagai Guide</td>
-                        <td>{item.createdAt}</td>
+                        <td>{moment(item.createdAt).format('MMM Do YY')}</td>
                         <td> <Button
                                   variant="warning"
                                   style={{ color: "white" }}
