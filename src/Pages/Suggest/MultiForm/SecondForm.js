@@ -1,225 +1,199 @@
-import React, { useState } from 'react'
-import { Form, Col, Row, Button, Modal } from 'react-bootstrap'
-import './MultiForm.scss'
+/* eslint-disable */
+import React, { useState } from "react";
+import { Form, Col, Row, Button, Modal } from "react-bootstrap";
+import "./MultiForm.scss";
 
-export const SecondForm = ({formData, setFormData,nextStep, prevStep}) => {
-
+export const SecondForm = ({ formData, setFormData, nextStep, prevStep }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
- 
-
   const Next = (e) => {
     e.preventDefault();
-      nextStep();
-
+    nextStep();
   };
 
-  const handlePopUp = (e) =>{
+  const handlePopUp = (e) => {
     e.preventDefault();
-    setShow(true)
-  }
-  
-  const [inputField, setInputField] = useState([
-    {
-      attention: ""
-    },
-    
-    
-  ])
-  const [inputField2, setInputField2] = useState([
-    {
-      obligation: ""
-    },
-    
-    
-  ])
-  const [inputField3, setInputField3] = useState([
-    {
-      prohibition: ""
-    },
-    
-    
-  ])
-  console.log(formData)
+    setShow(true);
+  };
 
-const onSave = (event,index) =>{
-  setFormData((prevState) => ({
-    ...prevState,
-    content: {
-      ...prevState.content,
-      rules: {
-        ...prevState.content.rules,
-        attention: {
-          ...prevState.content.rules.attention,
-          [event.target.name]: event.target.value,
+  const onSave = (event, index) => {
+    let selectedKey = event.target.dataset.field;
+
+    setFormData((prevState) => ({
+      ...prevState,
+      content: {
+        ...prevState.content,
+        rules: {
+          ...prevState.content.rules,
+          [selectedKey]: {
+            ...prevState.content.rules[selectedKey],
+            [event.target.name]: event.target.value,
+          },
         },
       },
-    },
-  }))
+    }));
+  };
 
-}
+  const handleAddFields = (e) => {
+    const baseDataset = { ...formData };
 
+    baseDataset.content.rules[e.target.name] = {
+      ...baseDataset.content.rules[e.target.name],
+      [String(
+        Object.entries(baseDataset.content.rules[e.target.name]).length + 1
+      )]: "",
+    };
 
-const onSave2 = (event) =>{
-  setFormData((prevState) => ({
-    ...prevState,
-    content: {
-      ...prevState.content,
-      rules: {
-        ...prevState.content.rules,
-        obligation: {
-          ...prevState.content.rules.obligation,
-          [event.target.name]: event.target.value,
-        },
-      },
-    },
-  }))
-}
+    setFormData({ ...baseDataset });
+  };
 
-const onSave3 = (event) =>{
-  setFormData((prevState) => ({
-    ...prevState,
-    content: {
-      ...prevState.content,
-      rules: {
-        ...prevState.content.rules,
-        prohibition: {
-          ...prevState.content.rules.prohibition,
-          [event.target.name]: event.target.value,
-        },
-      },
-    },
-  }))
-}
+  const handleDeleteFields = (e) => {
+    const baseDataset = { ...formData };
 
+    delete baseDataset.content.rules[e.target.name][
+      String(Object.entries(baseDataset.content.rules[e.target.name]).length)
+    ];
 
-  const handleAddFields = () => {
-    setInputField([...inputField, { attention:'' }])
-  
-  }
-  const handleAddFields2 = () => {
-    setInputField2([...inputField2, { obligation:'' }])
-  }
-  const handleAddFields3 = () => {
-    setInputField3([...inputField3, { prohibition:'' }])
-  }
+    setFormData({ ...baseDataset });
+  };
 
-  const handleDeleteFields = (index) => {
-    const values = [...inputField]
-    values.splice(index,1);
-    setInputField(values)
-  }
-  const handleDeleteFields2 = (index) => {
-    const values = [...inputField2]
-    values.splice(index,1);
-    setInputField2(values)
-  }
-  const handleDeleteFields3 = (index) => {
-    const values = [...inputField3]
-    values.splice(index,1);
-    setInputField3(values)
-  }
   return (
-    <Form onSubmit={handlePopUp}>
-    <h4>Masukan hal yang menjadi Perhatian</h4>
-    {inputField.map((inputField,index)=>(
-      <div key={index+1}>
-        <Form.Group className="mb-3">
-                <Form.Label>Nomor :{index+1}</Form.Label>
-                <Form.Control type='text' name={index+1} value={formData.content.rules.attention[index+1]} required  placeholder='Contoh : Diharap Membawa Tenda Sendiri' onChange={onSave}/>
-            </Form.Group>
-            
+    <Form onSubmit={nextStep}>
+      <h4>Masukan hal yang menjadi Perhatian</h4>
+      {Object.entries(formData.content.rules.attention).map((_, index) => (
+        <div key={index + 1}>
+          <Form.Group className="mb-3">
+            <Form.Label>Nomor :{index + 1}</Form.Label>
+            <Form.Control
+              type="text"
+              value={formData.content.rules.attention[index + 1]}
+              name={index + 1}
+              data-field="attention"
+              required
+              placeholder="Contoh : Diharap Membawa Tenda Sendiri"
+              onChange={onSave}
+            />
+          </Form.Group>
+        </div>
+      ))}
+      <div className="tombol-aksi pt-2 pb-3">
+        <button
+          type="button"
+          className="btn btn-success"
+          name="attention"
+          onClick={handleAddFields}
+        >
+          +
+        </button>
+        {Object.entries(formData.content.rules.attention).length === 1 ? (
+          ""
+        ) : (
+          <button
+            type="button"
+            name="attention"
+            style={{ marginLeft: "5px" }}
+            className="btn btn-danger"
+            onClick={handleDeleteFields}
+          >
+            -
+          </button>
+        )}
       </div>
-    
-    ))}
-    <div className="tombol-aksi pt-2 pb-3">
-    <button type='button' className='btn btn-success'  onClick={()=> handleAddFields()}>+</button>
-      {inputField.length === 1 ? '' : <button type='button' style={{ marginLeft:"5px" }}zx className='btn btn-danger' onClick={()=> handleDeleteFields()}>-</button>}
-      </div> 
-    
-    <br></br>
+
+      <br></br>
 
       <h4>Masukan hal yang menjadi Kewajiban</h4>
-    {inputField2.map((inputField,index)=>(
-      <div key={index+1}>
-        <Form.Group className="mb-3">
-                <Form.Label>Nomor :{index+1}</Form.Label>
-                <Form.Control type='text' name={index+1}  placeholder='Contoh : Harus Memakai Pakaian Serba Putih' onChange={onSave2}/>
-            </Form.Group>
-            
+      {Object.entries(formData.content.rules.obligation).map((_, index) => (
+        <div key={index + 1}>
+          <Form.Group className="mb-3">
+            <Form.Label>Nomor :{index + 1}</Form.Label>
+            <Form.Control
+              type="text"
+              name={index + 1}
+              value={formData.content.rules.obligation[index + 1]}
+              data-field="obligation"
+              placeholder="Contoh : Harus Memakai Pakaian Serba Putih"
+              onChange={onSave}
+            />
+          </Form.Group>
+        </div>
+      ))}
+      <div className="tombol-aksi pt-2 pb-3">
+        <button
+          type="button"
+          name="obligation"
+          className="btn btn-success"
+          onClick={handleAddFields}
+        >
+          +
+        </button>
+        {Object.entries(formData.content.rules.obligation).length === 1 ? (
+          ""
+        ) : (
+          <button
+            type="button"
+            style={{ marginLeft: "5px" }}
+            className="btn btn-danger"
+            name="obligation"
+            onClick={handleDeleteFields}
+          >
+            -
+          </button>
+        )}
       </div>
-    
-    ))} 
-       <div className="tombol-aksi pt-2 pb-3">
-    <button type='button' className='btn btn-success'  onClick={()=> handleAddFields2()}>+</button>
-    {inputField2.length === 1 ? '' : <button type='button' style={{ marginLeft:"5px" }} className='btn btn-danger' onClick={()=> handleDeleteFields2()}>-</button>}
-      </div> 
       <br />
 
       <h4>Masukan hal yang menjadi Larangan</h4>
-    {inputField3.map((inputField,index)=>(
-      <div key={index+1}>
-        <Form.Group className="mb-3">
-                <Form.Label>Nomor :{index+1}</Form.Label>
-                <Form.Control type='text' name={index+1}  placeholder='Contoh : Jangan Memetik Buah Di Gunung Ini' onChange={onSave3}/>
-            </Form.Group>
-            
+      {Object.entries(formData.content.rules.prohibition).map((_, index) => (
+        <div key={index + 1}>
+          <Form.Group className="mb-3">
+            <Form.Label>Nomor :{index + 1}</Form.Label>
+            <Form.Control
+              type="text"
+              data-field="prohibition"
+              name={index + 1}
+              value={formData.content.rules.prohibition[index + 1]}
+              placeholder="Contoh : Jangan Memetik Buah Di Gunung Ini"
+              onChange={onSave}
+            />
+          </Form.Group>
+        </div>
+      ))}
+      <div className="tombol-aksi pt-2 pb-3">
+        <button
+          type="button"
+          name="prohibition"
+          className="btn btn-success"
+          onClick={handleAddFields}
+        >
+          +
+        </button>
+        {Object.entries(formData.content.rules.prohibition).length === 1 ? (
+          ""
+        ) : (
+          <button
+            type="button"
+            style={{ marginLeft: "5px" }}
+            className="btn btn-danger"
+            name="prohibition"
+            onClick={handleDeleteFields}
+          >
+            -
+          </button>
+        )}
       </div>
-    
-    ))} 
-     <div className="tombol-aksi pt-2 pb-3">
-    <button type='button' className='btn btn-success'  onClick={()=> handleAddFields3()}>+</button>
-    {inputField3.length === 1 ? '' : <button type='button' style={{ marginLeft:"5px" }} className='btn btn-danger' onClick={()=> handleDeleteFields3()}>-</button>}
-      </div>
-      <div className='next-prev'>
-   <Button variant='warning' type='submit'>Lanjut</Button>
-        </div> 
-
-        <Modal
-        size='md'
-        show={show}
-        onHide={handleClose}
-      
-      >
-        <Modal.Header>
-          <Modal.Title>Data Panduan Gunung Yang Anda Masukkan</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="form-content">
-            <h5>Perhatian</h5>
-            {formData.content.rules.attention && Object.values(formData.content.rules.attention).map((ele,index)=>(
-                            <React.Fragment key={index}>
-                              <li>{ele}</li>
-                            </React.Fragment>
-                    ))}
-            <br />
-            <h5>Kewajiban</h5>
-            {formData.content.rules.obligation && Object.values(formData.content.rules.obligation).map((ele,index)=>(
-                            <React.Fragment key={index}>
-                              <li>{ele}</li>
-                            </React.Fragment>
-                    ))}
-            <br />
-            <h5>Larangan</h5>
-            {formData.content.rules.prohibition && Object.values(formData.content.rules.prohibition).map((ele,index)=>(
-                            <React.Fragment key={index}>
-                              <li>{ele}</li>
-                            </React.Fragment>
-                    ))}
-            <br />
-            
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Not Yet!
+      <div className="next-prev">
+      <Button variant="warning" onClick={prevStep}>
+            Kembali
           </Button>
-          <Button variant="primary" onClick={()=> nextStep()}>Sure</Button>
-        </Modal.Footer>
-      </Modal>
-   
+        <Button variant="success" type="submit">
+          Lanjut
+        </Button>
+      </div>
+
+      
     </Form>
-  )
-}
+  );
+};

@@ -7,7 +7,7 @@ import Navigation from './GlobalComponent/NavigationBar/Navigation'
 const Layout = () => {
   return (
     <main className='App'>
-      <ScrollUp/>
+      
       <Navigation/>
         <Outlet/>
         <Footer/>

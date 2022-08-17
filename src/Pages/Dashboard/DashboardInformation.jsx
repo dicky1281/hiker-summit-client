@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import Modal from "./PopUp";
 import { publicAxiosInstance } from "../../Instance/axiosInstance";
+import moment from 'moment'
 
 const DashboardInformation = () => {
   const user = useSelector((state) => state.user.user);
@@ -33,7 +34,8 @@ const DashboardInformation = () => {
     content,
     attention,
     obligation,
-    prohibition
+    prohibition,
+    lvl
   ) => {
     let tempData = [
       title,
@@ -47,6 +49,7 @@ const DashboardInformation = () => {
       attention,
       obligation,
       prohibition,
+      lvl
     ];
     setTempData((item) => [...tempData]);
     return setShow4(true);
@@ -121,7 +124,7 @@ const DashboardInformation = () => {
                         <React.Fragment key={index}>
                           <tr>
                             <td>Menyarankan Informasi Gunung</td>
-                            <td>{item.createdAt}</td>
+                            <td>{moment(item.createdAt).format('MMM Do YY')}</td>
                             <td>
                               {" "}
                               {item.approved === "approved" ? (
@@ -157,7 +160,7 @@ const DashboardInformation = () => {
                                     item?.content?.rules?.attention,
                                     item?.content?.rules?.obligation,
                                     item?.content?.rules?.prohibition,
-                                    item.price_per_day
+                                    item?.difficulty
                                   )
                                 }
                               >
@@ -210,6 +213,7 @@ const DashboardInformation = () => {
         perh={tempData[8]}
         kew={tempData[9]}
         lar={tempData[10]}
+        lvl={tempData[11]}
       />
       <Modal
         show5={show5}

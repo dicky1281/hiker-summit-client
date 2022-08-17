@@ -12,6 +12,7 @@ import {
   updateProfilePicture,
 } from "../../features/userSlice";
 import "./Dashboard.scss";
+import { useEffect } from "react";
 
 const DashboardAccount = () => {
   const user = useSelector((state) => state.user.user);
@@ -26,6 +27,7 @@ const DashboardAccount = () => {
   const handleClose3 = () => setShow3(false);
   const handleShow3 = () => setShow3(true);
 
+  const [stats , setStats] = useState(null)
   const [confirm, setConfirm] = useState({
     ConfPass: "",
     password: "",
@@ -76,7 +78,14 @@ const DashboardAccount = () => {
     }
   };
 
-  console.log(user)
+  const getStats = async () => {
+    const response = await privateInstance.get(`/api/v1/users/${user._id}`)
+    setStats(response.data.result)
+  }
+
+useEffect(()=>{
+  getStats()
+},[])
 
   const handleVerify = async () => {
     try {
@@ -143,7 +152,7 @@ const DashboardAccount = () => {
 
               <div className="detail">
                 <label htmlFor="">Peran</label>
-                <p>{user.user_status}</p>
+                <p>{stats === null ? user.user_status : stats.user_status}</p>
               </div>
 
               <div className="detail">
@@ -166,7 +175,7 @@ const DashboardAccount = () => {
           <Col lg={{ span: 5, offset: 2 }} className="profile-image">
             <div className="image">
               <img
-                src={`https://hiker-summit.herokuapp.com/api/v1/assets?bucket=user_assets&key=${user.image_assets.assets_key}`}
+                src={user.image_assets.assets_key === "" ? '/img/User.png' : `https://hiker-summit.herokuapp.com/api/v1/assets?bucket=user_assets&key=${user.image_assets.assets_key}`}
                 alt=""
               />
               <Form.Group controlId="formFile" className="pt-4">

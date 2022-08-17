@@ -12,6 +12,7 @@ import {
 import { wishlist, wishlistRemove } from "../../features/userSlice";
 
 function Explore() {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const destination = useSelector(destinationSelectors.selectAll);
@@ -38,6 +39,8 @@ function Explore() {
   useEffect(() => {
     dispatch(getDestinations());
   }, [dispatch]);
+
+  const container = destination?.filter(name => name.approved === "approved") 
 
   const handleChange = (e) => {
     const { name } = e.target;
@@ -77,7 +80,7 @@ function Explore() {
   };
 
   // eslint-disable-next-line array-callback-return
-  const arr = destination?.map((item, index) => (
+  const arr = container?.map((item, index) => (
     <React.Fragment key={index}>
       <Cards
       stats={user === null ? "none" : ""}
@@ -102,12 +105,15 @@ function Explore() {
     .map((category) => category[0]);
 
 
-  const filteredProducts = destination
+  const filteredProducts = container
     ?.filter(({ location }) => checkedProducts.includes(location?.island))
     .map((item, index) => (
       <React.Fragment key={index}>
         <Cards
           going={`/explore/${item._id}`}
+          stats={user === null ? "none" : ""}
+      warna={user === null ? "transparent" :user.destination_wishlist.includes(item._id) ? "red":"black"}
+        aksi={user === null ? '' :  user.destination_wishlist.includes(item._id)? () => handleRemoveWish(item._id) : ()=> handleWishlist(item._id)}
           imgs={`https://hiker-summit.herokuapp.com/api/v1/assets?bucket=${item.content.image_assets.bucket}&key=${item.content.image_assets.assets_key[0]}`}
           key={item.id}
           mouname={item.title}
@@ -116,12 +122,15 @@ function Explore() {
         />
       </React.Fragment>
     ));
-  const filteredProducts2 = destination
+  const filteredProducts2 = container
     ?.filter(({ difficulty }) => checkedProducts2.includes(difficulty))
     .map((item, index) => (
       <React.Fragment key={index}>
         <Cards
           going={`/explore/${item._id}`}
+          stats={user === null ? "none" : ""}
+      warna={user === null ? "transparent" :user.destination_wishlist.includes(item._id) ? "red":"black"}
+        aksi={user === null ? '' :  user.destination_wishlist.includes(item._id)? () => handleRemoveWish(item._id) : ()=> handleWishlist(item._id)}
           imgs={`https://hiker-summit.herokuapp.com/api/v1/assets?bucket=${item.content.image_assets.bucket}&key=${item.content.image_assets.assets_key[0]}`}
           key={item.id}
           mouname={item.title}
@@ -139,6 +148,61 @@ function Explore() {
             <div className="filter-title">
               <h3>Filter</h3>
             </div>
+            <h3>Pulau</h3>
+            <Container>
+            <label htmlFor="" className="cebox">
+                Jawa
+                <input
+                  type="checkbox"
+                  name="jawa"
+                  value="jawa"
+                  onChange={handleChange}
+                  checked={checked.categories.jawa}
+                />
+              </label>
+              <label htmlFor="" className="cebox">
+                Kalimatan
+                <input
+                  type="checkbox"
+                  name="kalimantan"
+                  value="kalimantan"
+                  onChange={handleChange}
+                  checked={checked.categories.kalimantan}
+                />
+              </label>
+              <label htmlFor="" className="cebox">
+                Papua
+                <input
+                  type="checkbox"
+                  name="papua"
+                  value="papua"
+                  onChange={handleChange}
+                  checked={checked.categories.papua}
+                />
+              </label>
+              <label htmlFor="" className="cebox">
+                Sulawesi
+                <input
+                  type="checkbox"
+                  name="sulawesi"
+                  value="sulawesi"
+                  onChange={handleChange}
+                  checked={checked.categories.sulawesi}
+                />
+              </label>
+              <label htmlFor="" className="cebox">
+                Sumatera
+                <input
+                  type="checkbox"
+                  name="sumatera"
+                  value="sumatera"
+                  onChange={handleChange}
+                  checked={checked.categories.sumatera}
+                />
+              </label>
+              
+            </Container>
+            
             <h3 className="tingkatan">Tingkatan</h3>
             <Container>
               <label htmlFor="" className="cebox">

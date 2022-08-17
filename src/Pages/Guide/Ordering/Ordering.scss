@@ -1,0 +1,36 @@
+.form-content {
+  font-family: "Quicksand", sans-serif;
+}
+
+.modal-book {
+  .konten {
+    justify-content: space-between;
+    padding: 0px 20px 0px 20px;
+  }
+  h3 {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 700;
+    color: #7c8691;
+  }
+}
+.modal-being {
+  font-family: "Quicksand", sans-serif;
+  .icon-box{
+    background-color:#13C39C ;
+    border: #25FFAE;
+  }
+  h4 {
+    font-weight: 700;
+    color: #7c8691;
+  }
+  p {
+    font-weight: 400;
+    color: #7c8691;
+  }
+}
+option {
+  text-transform: capitalize;
+}
+select {
+  text-transform: capitalize;
+}

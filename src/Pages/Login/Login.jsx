@@ -26,7 +26,7 @@ const Login = () => {
     e.preventDefault();
     try{
       setLoading(true)
-      const response = await loginHandler(dispatch,{username, password})
+    await loginHandler(dispatch,{username, password})
       navigate(`/guide`)
 
     } catch (error) {

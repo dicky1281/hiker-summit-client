@@ -15,6 +15,7 @@
     background-color: white;
     padding-bottom: 20px;
     height: 100%;
+    margin-top: 20px;
 }
 .filter-item h3{
     padding-left: 10px;
@@ -61,7 +62,6 @@
   .main{
     display: flex;
    
-    flex-wrap: wrap;
   }
   @media (max-width:770px){
     .filter-item{
@@ -73,6 +73,8 @@
       display: flex;
     }
     .main{
+      flex-wrap: wrap;
+      flex-direction: column;
       padding-top: 40px;
     }
   }

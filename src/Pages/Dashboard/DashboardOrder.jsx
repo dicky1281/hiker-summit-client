@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Table, OverlayTrigger,Tooltip } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import { publicAxiosInstance } from "../../Instance/axiosInstance";
@@ -13,6 +13,8 @@ function DashboardOrder() {
   const [book, setBook] = useState(null);
   const [container, setContainer] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [stats , setStats] = useState(null)
+  
 
   const [guide, setGuide] = useState(null);
   const [allBook, setAllBook] = useState(null);
@@ -20,14 +22,27 @@ function DashboardOrder() {
   const handleClose4 = () => setShow4(false);
   const [show4, setShow4] = useState(false);
 
+  const [show7, setShow7] = useState(false)
+  const handleClose7 = () => setShow7(false)
+
+
   const [image, setImage] = useState([]);
 
+  // Data for unggah bukti
   const [tempData, setTempData] = useState([]);
   const getData = (title, payment, id) => {
     let tempData = [title, payment, id];
     setTempData((item) => [...tempData]);
     return setShow4(true);
   };
+
+  // Data for Guide
+  const [temp, setTemp] = useState([])
+  const getInfo = (title,depart, arrive, hikerCount , notes, id) =>{
+    let temp = [title, depart, arrive, hikerCount, notes, id];
+    setTemp((item) => [...temp])
+    return setShow7(true)
+  }
 
   const getBook = async () => {
     if (user.user_status === "umum") {
@@ -41,6 +56,12 @@ function DashboardOrder() {
     }
   };
 
+  const getStats = async () => {
+    const response = await privateInstance.get(`/api/v1/users/${user._id}`)
+    setStats(response.data.result)
+  }
+
+
   useEffect(() => {
     (async () => {
       const response = await privateInstance.get(
@@ -51,20 +72,19 @@ function DashboardOrder() {
       setBook(response.data.result);
       setLoading(false);
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, []);
 
   useEffect(() => {
-    (async () => {
       getBook();
-    })();
+      getStats()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+ 
 
   const guideUser = guide?.filter((ele) => ele.user_id === user._id);
   const finalGuideBook = allBook?.filter((ele)=> ele.destination_id === guideUser?.[0]?.destination_id).filter((a)=> a.hiker_count <= guideUser?.[0]?.allowed_hiker_count)
  
-
 
 
  
@@ -84,7 +104,7 @@ function DashboardOrder() {
 
   const handleAccept = async (book_id) => {
     try {
-      await privateInstance.post(
+       await privateInstance.post(
         `/api/v1/bookings/${book_id}/guides/${user._id}`
       );
       window.location.reload(false);
@@ -114,7 +134,7 @@ function DashboardOrder() {
       ) : (
         <div className="order">
           <Container>
-            {user.user_status === "umum" ? (
+            {stats?.user_status === "umum" ? (
               <>
                 <h2 className="title">Pesanan Saya</h2>
                 <Table responsive="lg text-center">
@@ -143,7 +163,17 @@ function DashboardOrder() {
                               {item.booking_status === "canceled" ? (
                                 <Button variant="danger">Dibatalkan</Button>
                               ) : item.booking_status === "declined" ? (
+                                <OverlayTrigger
+                                key="bottom"
+                                placement="bottom"
+                                overlay={
+                                  <Tooltip id="tooltip-bottom">
+                                    Tooltip on <strong>test</strong>.
+                                  </Tooltip>
+                                }
+                              >
                                 <Button variant="danger">Ditolak</Button>
+                              </OverlayTrigger>
                               ) : item.guide_id === "" ? (
                                 <Button variant="warning">
                                   Menunggu Verifikasi Guide
@@ -207,7 +237,7 @@ function DashboardOrder() {
             ) : (
               <>
                 <h2 className="title">Pesanan Saya</h2>
-                <Table responsive="lg">
+                <Table responsive="lg text-center">
                   <thead>
                     <tr>
                       <th>Destinasi</th>
@@ -221,7 +251,6 @@ function DashboardOrder() {
                       const a = container.filter(
                         (data) => data?._id === item?.destination_id
                       );
-                    
                       return (
                         <React.Fragment key={index}>
                           <tr>
@@ -233,7 +262,17 @@ function DashboardOrder() {
                               {item.booking_status === "canceled" ? (
                                 <Button variant="danger">Dibatalkan</Button>
                               ) : item.booking_status === "declined" ? (
+                                <OverlayTrigger
+                                key="bottom"
+                                placement="bottom"
+                                overlay={
+                                  <Tooltip id="tooltip-bottom">
+                                    <h6>{item.response_note}</h6>
+                                  </Tooltip>
+                                }
+                              >
                                 <Button variant="danger">Ditolak</Button>
+                              </OverlayTrigger>
                               ) : item.guide_id === "" ? (
                                 <Button variant="warning">
                                   Menunggu Verifikasi Guide
@@ -295,7 +334,7 @@ function DashboardOrder() {
                 </Table>
 
                 <h2 className="title">Pesanan Menjadi Guide</h2>
-                <Table responsive="lg">
+                <Table responsive="lg text-center">
                   <thead>
                     <tr>
                       <th>Destinasi</th>
@@ -309,6 +348,7 @@ function DashboardOrder() {
                       const b = container.filter(
                         (ele) => ele._id === item.destination_id
                       );
+                      console.log(finalGuideBook)
                     
                       return (
                         <React.Fragment key={index}>
@@ -324,9 +364,18 @@ function DashboardOrder() {
                                 <Button
                                   variant="outline-warning"
                                   style={{ color:"orange" }}
-                                  onClick={() => handleAccept(item._id)}
+                                  onClick={() =>
+                                    getInfo(
+                                      b[0].title,
+                                      item.date.departure,
+                                      item.date.arrival,
+                                      item.hiker_count,
+                                      item.note,
+                                      item._id
+                                    )
+                                  }
                                 >
-                                  Terima
+                                  View Details
                                 </Button>
                               ) : (
                                 <Button variant="success">Diterima</Button>
@@ -349,6 +398,18 @@ function DashboardOrder() {
             onChange={(event) => setImage(event.target.files)}
             click={() => handleSend(tempData[2])}
           />
+          <Modal
+          show6={show7}
+          close6={handleClose7}
+          gunung={temp[0]}
+          Date1={temp[1]}
+          Date2={temp[2]}
+          hiker={temp[3]}
+          notes={temp[4]}
+          id6={temp[5]}
+          click6={handleAccept}
+
+           />
         </div>
       )}
     </>

@@ -36,7 +36,7 @@ const CardDisplay = () => {
     setLoading(false);
   }
 
-
+  const container = destination?.filter(name => name.approved === "approved") 
   useEffect(() => {
     getAllDestination();
   }, []);
@@ -52,7 +52,7 @@ const CardDisplay = () => {
             {loading ? (
               <p>Loading</p>
             ) : (
-              destination.map((item, index) => (
+              container.map((item, index) => (
                 <React.Fragment key={index}>
                   <Cards
                   stats={user === null ? "none" : ""}

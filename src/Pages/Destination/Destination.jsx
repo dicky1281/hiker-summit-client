@@ -155,9 +155,7 @@ const Destination = () => {
                                         <img
                                           src={
                                             gg[0].image_assets.bucket ===
-                                            null ? (
-                                              <p>kosong</p>
-                                            ) : (
+                                            '' ? '/img/User.png' : (
                                               `https://hiker-summit.herokuapp.com/api/v1/assets?bucket=${gg[0].image_assets.bucket}&key=${gg[0].image_assets.assets_key}`
                                             )
                                           }

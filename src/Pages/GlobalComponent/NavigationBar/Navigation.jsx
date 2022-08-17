@@ -4,12 +4,16 @@ import { Nav, Navbar, Container, Offcanvas, Button, NavDropdown } from "react-bo
 import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutHandler } from "../../../apiCalls/apiCalls";
+import jwt_decode from "jwt-decode";
+import { useEffect } from "react";
 
 const Navigation = () => {
   const expand = "lg";
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+ 
 
   const [scroll, setScroll] = useState(false)
   const handleScroll = () =>{
@@ -19,12 +23,34 @@ const Navigation = () => {
       setScroll(false)
     }
   }
+ 
+
+  const stat = () => {
+    const currentDate = new Date()
+    const decode = jwt_decode(user?.accessToken)
+    if(decode.exp * 1000 < currentDate.getTime()){
+      Logout()
+      alert("Silahkan Login Kembali")
+    }else{
+      
+    }
+  }
+  const getOut = () => {
+    if(user === null){
+      
+    }else{
+      stat()
+    }
+  }
 
   window.addEventListener('scroll', handleScroll)
 
   const location = useLocation();
   const path = location.pathname.split('/')
 
+  useEffect(()=>{
+   getOut()
+  },[user])
 
   const Logout = () => {
     logoutHandler(dispatch);
@@ -33,7 +59,7 @@ const Navigation = () => {
 
 
   return (
-    <header className={scroll ? "fixed-top sticky" : "fixed-top"} style={{ backgroundColor : path.includes('search') || (path.includes('explore') && path.length > 2) ? "#417269" : "transparent", padding : path.includes('search') ? "0px 0px" : ""}}>
+    <header className={scroll ? "fixed-top sticky" : "fixed-top"} style={{ backgroundColor : path.includes('search') || path.includes("register") || (path.includes('explore')  && path.length > 2) ? "#417269" : "transparent", padding : path.includes('search') || path.includes('register') || (path.includes('explore') && path.length > 2) ? "0px 0px" : ""}}>
       <Navbar key={expand} expand={expand}>
         <Container>
           <Navbar.Brand><NavLink to='/home'>HikerSummit</NavLink></Navbar.Brand>

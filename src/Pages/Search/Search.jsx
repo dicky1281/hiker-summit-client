@@ -9,6 +9,7 @@ import { destinationSelectors, getDestinations } from '../../features/destinatio
 const Search = (props) => {
   const dispatch = useDispatch()
   const destinations = useSelector(destinationSelectors.selectAll)
+  const user = useSelector((state) => state.user.user);
   const [sort, setSort] = useState('')
 
 
@@ -36,7 +37,8 @@ const Search = (props) => {
   
         return(
           <React.Fragment key={item.id}>
-          <Cards  going={`/explore/${item._id}`} imgs={`http://localhost:5000/api/v1/assets?bucket=${item.content.image_assets.bucket}&key=${item.content.image_assets.assets_key[0]}`}  mouname={item.title} lokasi={item.location.province} kesulitan={item.difficulty}/>
+          <Cards stats={user === null ? "none" : ""}
+      warna={user === null ? "transparent" :user.destination_wishlist.includes(item._id) ? "red":"black"} going={`/explore/${item._id}`} imgs={`https://hiker-summit.herokuapp.com/api/v1/assets?bucket=${item.content.image_assets.bucket}&key=${item.content.image_assets.assets_key[0]}`}  mouname={item.title} lokasi={item.location.province} kesulitan={item.difficulty}/>
   
           </React.Fragment>
         )

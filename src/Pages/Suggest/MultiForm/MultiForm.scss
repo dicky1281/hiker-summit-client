@@ -17,7 +17,7 @@
   .progressbar li {
     list-style: none;
     display: inline-block;
-    width: 30.33%;
+    width: 25%;
     position: relative;
     text-align: center;
   
@@ -40,7 +40,7 @@
     content: "";
     position: absolute;
     width: 100%;
-    height: 1px;
+    height: 5px;
     background-color: #ddd;
     top: 15px;
     left: -50%;
@@ -50,11 +50,21 @@
     content: none;
   }
   .progressbar li.active {
-    color: green;
+    color: #417269;
   }
   .progressbar li.active:before {
     border-color: green;
+    color: white;
+    background-color: #417269;
   } 
   .progressbar li.active + li:after {
     background-color: green;
+  }
+  .imge{
+    background-color: rgba(178, 177, 177, 0.5);
+    padding: 20px;
+
+    img{
+      width: -webkit-fill-available;
+    }
   }
