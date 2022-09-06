@@ -1,3 +1,7 @@
+.Search{
+    background-color: whitesmoke;
+    padding-bottom: 20px;
+}
 .search-content{
     height: 35vh;
     margin-bottom: 50px;
@@ -6,6 +10,8 @@
     align-items:center;
     flex-direction: column;
     bottom: 0;
+    
+ 
 
     h2{
         font-family: QuickSand;
@@ -38,7 +44,8 @@
    
 }
 .search-desti{
-    height: 100vh;
+    height: 100%;
+    background-color: whitesmoke;
     
     .container{
         display: flex;

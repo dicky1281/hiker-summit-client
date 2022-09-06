@@ -48,7 +48,7 @@ const CardDisplay = () => {
           Bayangkan Petualanganmu<br></br>Selanjutnya
         </h1>
         <div className="card-mountain">
-          <div className="row">
+        
             {loading ? (
               <p>Loading</p>
             ) : (
@@ -69,7 +69,7 @@ const CardDisplay = () => {
               ))
             )}
           </div>
-        </div>
+       
         <div className="tombol text-center">
           <Button onClick={() => navigate("/explore")} variant="warning">
             Explore Lebih Lanjut

@@ -119,6 +119,7 @@ function DashboardOrder() {
         `/api/v1/bookings/${book_id}/users/${user._id}/cancel`
       );
       alert('Booking Berhasil Dibatalkan')
+      window.location.reload(false)
     } catch (error) {}
   };
   return (

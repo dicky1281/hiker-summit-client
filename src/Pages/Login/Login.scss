@@ -5,40 +5,44 @@
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-}
-.login-content{
-    padding-top: 230px;
-}
-.form-group{
-    padding-bottom: 10px;
-}
-.form-check{
-    padding-bottom: 10px;
-}
-.login-content h2{
-    font-family: 'Quicksand';
-font-style: normal;
-font-weight: 700;
-}
-.login-content p{
-    font-family: 'Quicksand';
-font-style: normal;
-font-weight: 500;
-}
-.login-content label{
-    font-family: 'Quicksand';
-    font-style: normal;
-    font-weight: 700;
-}
-.login-content .form-control{
-    background: rgba(228, 228, 228, 0.75);
-    border-radius: 9px;
-    border: none;
-}
 
-.login-content button{
-    font-family: 'Quicksand';
+  .login-content{
+    padding-top: 30vh;
+
+    button{
+        font-family: 'Quicksand';
+        font-style: normal;
+        font-weight: 700;
+        border-radius: 9px;
+    }
+
+    h2{
+        font-family: 'Quicksand';
     font-style: normal;
     font-weight: 700;
-    border-radius: 9px;
+    }
+    p{
+        font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 500;
+    }
+
+    .form-group{
+        padding-bottom: 10px;
+    }
+    label{
+        font-family: 'Quicksand';
+        font-style: normal;
+        font-weight: 700;
+    }
+    .form-check{
+        padding-bottom: 10px;
+    }
+    .form-control{
+        background: rgba(228, 228, 228, 0.75);
+        border-radius: 9px;
+        border: none;
+    }
+    
+}
 }
