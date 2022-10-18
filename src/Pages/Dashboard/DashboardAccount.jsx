@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import { Col, Container, Row, Form, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { PutHandler } from "../../apiCalls/apiCalls";
+import { getUserData, PutHandler, sendEmailVerify, updateImage } from "../../apiCalls/apiCalls";
 import Modal from "./PopUp";
 import {
   lastName,
@@ -45,10 +45,7 @@ const DashboardAccount = () => {
   });
 
   const handlePutName = async (e) => {
-    dispatch(name(formData.first_name));
-    dispatch(lastName(formData.last_name));
-    dispatch(phone(formData.phone_number));
-    dispatch(username(formData.username));
+    
     PutHandler(dispatch, privateInstance, user, formData);
   };
 
@@ -66,20 +63,11 @@ const DashboardAccount = () => {
     const files = e.target.files[0];
     const data = new FormData();
     data.append("image", files);
-    try {
-      const { data: uploadResponse } = await privateInstance.put(
-        `/api/v1/users/profile_picture/${user._id}`,
-        data
-      );
-      dispatch(updateProfilePicture(uploadResponse.result));
-      window.location.reload(false);
-    } catch (error) {
-      console.log(error);
-    }
+      dispatch(updateImage(dispatch,privateInstance, user._id , data))   
   };
 
   const getStats = async () => {
-    const response = await privateInstance.get(`/api/v1/users/${user._id}`)
+    const response = dispatch(getUserData(privateInstance, user._id))
     setStats(response.data.result)
   }
 
@@ -88,14 +76,7 @@ useEffect(()=>{
 },[])
 
   const handleVerify = async () => {
-    try {
-      await privateInstance.post(`/api/v1/confirmation/${user._id}`);
-      alert(
-        "Silahkan Lakukan Konfirmasi Melalui Email Yang Telah Kirimkan, dan coba untuk login kembali"
-      );
-    } catch (error) {
-      alert("Terjadi Kesalahan");
-    }
+    dispatch(sendEmailVerify(privateInstance, user._id))
   };
 
   const lol = () => {
